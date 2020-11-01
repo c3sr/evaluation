@@ -3,7 +3,7 @@ package metrics
 import (
 	"testing"
 
-	"github.com/rai-project/dlframework/framework/feature"
+	"github.com/c3sr/dlframework/framework/feature"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -3,7 +3,7 @@ package metrics
 import (
 	"sync"
 
-	"github.com/rai-project/dlframework"
+	"github.com/c3sr/dlframework"
 )
 
 type FeatureCompareFunction func(actual *dlframework.Features, expected interface{}) float64

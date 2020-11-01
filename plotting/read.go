@@ -7,7 +7,7 @@ import (
 
 	"github.com/Unknwon/com"
 	"github.com/pkg/errors"
-	"github.com/rai-project/evaluation"
+	"github.com/c3sr/evaluation"
 	model "github.com/uber/jaeger/model/json"
 )
 

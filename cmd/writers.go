@@ -11,7 +11,7 @@ import (
 
 	"github.com/Unknwon/com"
 	"github.com/olekukonko/tablewriter"
-	"github.com/rai-project/evaluation/writer"
+	"github.com/c3sr/evaluation/writer"
 )
 
 type Writer struct {

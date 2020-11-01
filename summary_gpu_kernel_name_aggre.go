@@ -3,7 +3,7 @@ package evaluation
 import (
 	"fmt"
 
-	"github.com/rai-project/evaluation/writer"
+	"github.com/c3sr/evaluation/writer"
 	"github.com/spf13/cast"
 )
 

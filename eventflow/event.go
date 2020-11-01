@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/rai-project/evaluation/writer"
+	"github.com/c3sr/evaluation/writer"
 	"github.com/spf13/cast"
 	m "github.com/uber/jaeger/model"
 	model "github.com/uber/jaeger/model/json"

@@ -7,8 +7,8 @@ import (
 	"os"
 
 	"github.com/rai-project/config"
-	"github.com/rai-project/dlframework/framework/cmd"
-	evalcmd "github.com/rai-project/evaluation/cmd"
+	"github.com/c3sr/dlframework/framework/cmd"
+	evalcmd "github.com/c3sr/evaluation/cmd"
 	"github.com/sirupsen/logrus"
 )
 

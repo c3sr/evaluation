@@ -4,7 +4,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/rai-project/evaluation"
+	"github.com/c3sr/evaluation"
 	"github.com/spf13/cobra"
 )
 

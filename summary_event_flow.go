@@ -4,8 +4,8 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/rai-project/evaluation/eventflow"
-	"github.com/rai-project/evaluation/writer"
+	"github.com/c3sr/evaluation/eventflow"
+	"github.com/c3sr/evaluation/writer"
 	db "upper.io/db.v3"
 )
 

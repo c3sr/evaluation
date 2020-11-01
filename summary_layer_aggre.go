@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/rai-project/evaluation/writer"
+	"github.com/c3sr/evaluation/writer"
 	"github.com/rai-project/go-echarts/charts"
 	"github.com/spf13/cast"
 )

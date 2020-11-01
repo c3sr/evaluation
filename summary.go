@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/rai-project/evaluation/writer"
+	"github.com/c3sr/evaluation/writer"
 	"github.com/rai-project/machine"
 	nvidiasmi "github.com/rai-project/nvidia-smi"
 	"github.com/spf13/cast"

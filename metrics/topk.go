@@ -4,7 +4,7 @@ import (
 	"sort"
 
 	"github.com/rai-project/config"
-	"github.com/rai-project/dlframework"
+	"github.com/c3sr/dlframework"
 	"github.com/spf13/cast"
 )
 

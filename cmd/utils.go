@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/Unknwon/com"
-	framework "github.com/rai-project/dlframework/framework/cmd"
-	"github.com/rai-project/evaluation"
+	framework "github.com/c3sr/dlframework/framework/cmd"
+	"github.com/c3sr/evaluation"
 	udb "upper.io/db.v3"
 )
 

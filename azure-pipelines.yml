@@ -1,0 +1,13 @@
+jobs:
+  - job: CPU
+    timeoutInMinutes: 0
+    steps:
+      - task: GoTool@0
+        inputs:
+          version: '1.12.3'
+      - bash: |
+          curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+          dep ensure
+          go build -tags=nogpu
+          go test -tags=nogpu -race -v .
+

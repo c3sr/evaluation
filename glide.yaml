@@ -1,4 +1,4 @@
-package: github.com/rai-project/evaluation
+package: github.com/c3sr/evaluation
 import:
 - package: github.com/GeertJohan/go-sourcepath
 - package: github.com/Unknwon/com
@@ -10,7 +10,7 @@ import:
 - package: github.com/rai-project/database
   subpackages:
   - mongodb
-- package: github.com/rai-project/dlframework
+- package: github.com/c3sr/dlframework
   version: master
   subpackages:
   - framework/cmd

@@ -2,7 +2,7 @@ package metrics
 
 import (
 	"github.com/rai-project/config"
-	"github.com/rai-project/dlframework"
+	"github.com/c3sr/dlframework"
 )
 
 /*
