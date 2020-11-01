@@ -1396,8 +1396,8 @@
     "mongo",
   ]
   pruneopts = "UT"
-  revision = "4ffb97e6c03d072fd9d3b692851234f6bab7b31f"
-  version = "v3.7.1"
+  revision = "2f58dea678dbdcd3710158e8572025ef4d2c6df7"
+  version = "v3.5.7"
 
 [solve-meta]
   analyzer-name = "dep"
