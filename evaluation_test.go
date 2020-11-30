@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/rai-project/config"
-	"github.com/rai-project/database/mongodb"
-	"github.com/rai-project/tracer"
+	"github.com/c3sr/config"
+	"github.com/c3sr/database/mongodb"
+	"github.com/c3sr/tracer"
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"

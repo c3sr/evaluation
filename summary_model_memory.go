@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/rai-project/tracer"
+	"github.com/c3sr/tracer"
 
 	"github.com/k0kubun/pp"
 	"github.com/spf13/cast"

@@ -3,7 +3,7 @@ package metrics
 import (
 	"sort"
 
-	"github.com/rai-project/config"
+	"github.com/c3sr/config"
 	"github.com/c3sr/dlframework"
 	"github.com/spf13/cast"
 )

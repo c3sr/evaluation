@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/c3sr/evaluation/writer"
-	"github.com/rai-project/go-echarts/charts"
+	"github.com/c3sr/go-echarts/charts"
 	"github.com/spf13/cast"
 )
 

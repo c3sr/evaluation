@@ -147,7 +147,7 @@ func nextRandom() string {
 // will not choose the same file. The caller can use f.Name()
 // to find the pathname of the file. It is the caller's responsibility
 // to remove the file when no longer needed.
-func tempFile(dir, pattern string) string {
+func TempFile(dir, pattern string) string {
 	if dir == "" {
 		dir = os.TempDir()
 	}

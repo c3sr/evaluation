@@ -3,11 +3,11 @@ package evaluation
 import (
 	"time"
 
-	"github.com/rai-project/database"
-	"github.com/rai-project/database/mongodb"
+	"github.com/c3sr/database"
+	"github.com/c3sr/database/mongodb"
 	"github.com/c3sr/dlframework"
-	"github.com/rai-project/machine"
-	nvidiasmi "github.com/rai-project/nvidia-smi"
+	"github.com/c3sr/machine"
+	nvidiasmi "github.com/c3sr/nvidia-smi"
 	"gopkg.in/mgo.v2/bson"
 	"upper.io/db.v3"
 )

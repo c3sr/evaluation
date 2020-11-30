@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/rai-project/config"
+	"github.com/c3sr/config"
 	"github.com/c3sr/dlframework/framework/cmd"
 	evalcmd "github.com/c3sr/evaluation/cmd"
 	"github.com/sirupsen/logrus"

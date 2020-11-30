@@ -7,8 +7,8 @@ import (
 	"gopkg.in/mgo.v2/bson"
 	"upper.io/db.v3"
 
-	"github.com/rai-project/database"
-	"github.com/rai-project/database/mongodb"
+	"github.com/c3sr/database"
+	"github.com/c3sr/database/mongodb"
 	"github.com/c3sr/dlframework"
 )
 

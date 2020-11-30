@@ -2,7 +2,7 @@ package metrics
 
 import (
 	"github.com/chewxy/math32"
-	"github.com/rai-project/config"
+	"github.com/c3sr/config"
 	"github.com/c3sr/dlframework"
 )
 

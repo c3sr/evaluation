@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/c3sr/evaluation/writer"
-	"github.com/rai-project/machine"
-	nvidiasmi "github.com/rai-project/nvidia-smi"
+	"github.com/c3sr/machine"
+	nvidiasmi "github.com/c3sr/nvidia-smi"
 	"github.com/spf13/cast"
 	"gopkg.in/mgo.v2/bson"
 )

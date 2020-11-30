@@ -9,8 +9,8 @@ import (
 
 	"github.com/k0kubun/pp"
 	"github.com/c3sr/evaluation/writer"
-	"github.com/rai-project/go-echarts/charts"
-	"github.com/rai-project/tracer"
+	"github.com/c3sr/go-echarts/charts"
+	"github.com/c3sr/tracer"
 	"github.com/spf13/cast"
 	model "github.com/uber/jaeger/model/json"
 )

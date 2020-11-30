@@ -10,13 +10,13 @@ import (
 	"github.com/GeertJohan/go-sourcepath"
 	"github.com/Unknwon/com"
 	"github.com/k0kubun/pp"
-	"github.com/rai-project/config"
-	"github.com/rai-project/database"
-	mongodb "github.com/rai-project/database/mongodb"
+	"github.com/c3sr/config"
+	"github.com/c3sr/database"
+	mongodb "github.com/c3sr/database/mongodb"
 	frameworkCmd "github.com/c3sr/dlframework/framework/cmd"
 	"github.com/c3sr/evaluation"
-	_ "github.com/rai-project/logger/hooks"
-	_ "github.com/rai-project/tracer/all"
+	_ "github.com/c3sr/logger/hooks"
+	_ "github.com/c3sr/tracer/all"
 	"github.com/spf13/cobra"
 )
 
@@ -188,6 +188,6 @@ func init() {
 
 func init() {
 	goPath = com.GetGOPATHs()[0]
-	raiSrcPath = getSrcPath("github.com/rai-project")
+	raiSrcPath = getSrcPath("github.com/c3sr")
 	mlArcWebAssetsPath = filepath.Join(raiSrcPath, "ml-arc-web", "src", "assets", "data")
 }

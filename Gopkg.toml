@@ -26,64 +26,132 @@
 
 
 [[constraint]]
+  name = "github.com/AlekSi/pointer"
+  version = "1.1.0"
+
+[[constraint]]
   branch = "master"
   name = "github.com/GeertJohan/go-sourcepath"
 
 [[constraint]]
   name = "github.com/Unknwon/com"
-  version = "1.0.0"
-
-[[constraint]]
-  name = "github.com/k0kubun/pp"
-  version = "2.3.0"
+  version = "1.0.1"
 
 [[constraint]]
   branch = "master"
-  name = "github.com/olekukonko/tablewriter"
+  name = "github.com/c3sr/config"
 
 [[constraint]]
   branch = "master"
-  name = "github.com/rai-project/config"
+  name = "github.com/c3sr/database"
 
 [[constraint]]
-  branch = "master"
-  name = "github.com/rai-project/database"
-
-[[override]]
   branch = "master"
   name = "github.com/c3sr/dlframework"
 
 [[constraint]]
   branch = "master"
-  name = "github.com/rai-project/logger"
+  name = "github.com/c3sr/go-echarts"
 
 [[constraint]]
   branch = "master"
-  name = "github.com/rai-project/go-echarts"
+  name = "github.com/c3sr/logger"
 
-[[override]]
+[[constraint]]
   branch = "master"
-  name = "github.com/rai-project/tracer"
+  name = "github.com/c3sr/machine"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/c3sr/nvidia-smi"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/c3sr/parallel"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/c3sr/tracer"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/c3sr/utils"
+
+[[constraint]]
+  name = "github.com/cheekybits/genny"
+  version = "1.0.0"
+
+[[constraint]]
+  name = "github.com/chewxy/math32"
+  version = "1.1.0"
+
+[[constraint]]
+  name = "github.com/fatih/structs"
+  version = "1.1.0"
+
+[[constraint]]
+  name = "github.com/getlantern/deepcopy"
+  version = "1.0.0"
+
+[[constraint]]
+  name = "github.com/golang/snappy"
+  version = "0.0.2"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/ianlancetaylor/demangle"
+
+[[constraint]]
+  name = "github.com/k0kubun/pp"
+  version = "3.0.7"
+
+[[constraint]]
+  name = "github.com/levigross/grequests"
+  version = "0.10.0"
+
+[[constraint]]
+  name = "github.com/mailru/easyjson"
+  version = "0.7.6"
+
+[[constraint]]
+  name = "github.com/mattn/go-zglob"
+  version = "0.0.3"
+
+[[constraint]]
+  name = "github.com/mitchellh/go-homedir"
+  version = "1.1.0"
+
+[[constraint]]
+  name = "github.com/olekukonko/tablewriter"
+  version = "0.0.4"
+
+[[constraint]]
+  name = "github.com/pkg/errors"
+  version = "0.8.1"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/ready-steady/sort"
 
 [[constraint]]
   name = "github.com/sirupsen/logrus"
-  version = "1.4.1"
+  version = "1.7.0"
 
 [[constraint]]
   name = "github.com/spf13/cast"
-  version = "1.2.0"
+  version = "1.3.1"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/spf13/cobra"
+  version = "1.1.1"
 
 [[constraint]]
   name = "github.com/stretchr/testify"
-  version = "1.2.2"
+  version = "1.6.1"
 
 [[constraint]]
   name = "github.com/uber/jaeger"
-  version = "1.5.0"
+  version = "1.21.0"
 
 [[constraint]]
   branch = "v2"
@@ -91,11 +159,7 @@
 
 [[constraint]]
   name = "upper.io/db.v3"
-  version = "=3.5.7"
-
-[[override]]
-  name = "github.com/k0kubun/pp"
-  version = "3.0.1"
+  version = "3.7.1"
 
 [prune]
   go-tests = true

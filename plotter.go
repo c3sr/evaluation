@@ -6,8 +6,8 @@ import (
 	"path"
 
 	"github.com/pkg/errors"
-	"github.com/rai-project/go-echarts/charts"
-	"github.com/rai-project/utils/browser"
+	"github.com/c3sr/go-echarts/charts"
+	"github.com/c3sr/utils/browser"
 )
 
 type PlotNamed interface {

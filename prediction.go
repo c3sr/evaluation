@@ -3,8 +3,8 @@ package evaluation
 import (
 	"time"
 
-	"github.com/rai-project/database"
-	"github.com/rai-project/database/mongodb"
+	"github.com/c3sr/database"
+	"github.com/c3sr/database/mongodb"
 	"github.com/c3sr/dlframework"
 	"gopkg.in/mgo.v2/bson"
 )

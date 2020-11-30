@@ -1,7 +1,0 @@
-jobs:
-  - job: CPU
-    timeoutInMinutes: 0
-    steps:
-      - bash: |
-          cd dockerfiles
-          docker build -f Dockerfile .

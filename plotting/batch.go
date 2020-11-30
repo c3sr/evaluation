@@ -7,9 +7,11 @@ import (
 
 	"github.com/fatih/structs"
 	"github.com/pkg/errors"
+	"github.com/c3sr/evaluation"
+	"github.com/c3sr/evaluation/cmd"
 	"github.com/c3sr/evaluation/writer"
-	"github.com/rai-project/go-echarts/charts"
-	"github.com/rai-project/utils/browser"
+	"github.com/c3sr/go-echarts/charts"
+	"github.com/c3sr/utils/browser"
 	"github.com/spf13/cast"
 )
 
@@ -134,7 +136,7 @@ func (o batchPlot) BarPlotAdd(bar *charts.Bar) *charts.Bar {
 	}
 	bar.SetSeriesOptions(
 		charts.LabelTextOpts{Show: false},
-		charts.TextStyleOpts{FontSize: DefaultSeriesFontSize},
+		charts.TextStyleOpts{FontSize: evaluation.DefaultSeriesFontSize},
 	)
 	bar.SetGlobalOptions(
 		charts.XAxisOpts{Name: "BatchSize", Show: false, AxisLabel: charts.LabelTextOpts{Show: true}},
@@ -146,14 +148,14 @@ func (o batchPlot) BarPlotAdd(bar *charts.Bar) *charts.Bar {
 func (o batchPlot) BarPlot() *charts.Bar {
 	bar := charts.NewBar()
 	bar.SetGlobalOptions(
-		charts.ToolboxOpts{Show: true, TBFeature{SaveAsImage: struct{pixelRatio: 5}}},
+		charts.ToolboxOpts{Show: true, TBFeature: charts.TBFeature{SaveAsImage: charts.SaveAsImage{PixelRatio: 5}}},
 	)
 	bar = o.BarPlotAdd(bar)
 	return bar
 }
 
 func (o batchPlot) Write(path string) error {
-	bar := o.BarPlot(o.Name)
+	bar := o.BarPlot()
 	f, err := os.Create(path)
 	if err != nil {
 		return err
@@ -167,7 +169,7 @@ func (o batchPlot) Write(path string) error {
 }
 
 func (o batchPlot) Open() error {
-	path := tempFile("", "batchPlot_*.html")
+	path := cmd.TempFile("", "batchPlot_*.html")
 	if path == "" {
 		return errors.New("failed to create temporary file")
 	}
@@ -184,7 +186,7 @@ func (o batchPlot) Open() error {
 }
 
 func (o batchPlot) Handler(w http.ResponseWriter, _ *http.Request) {
-	bar := o.BarPlot(o.Name)
+	bar := o.BarPlot()
 	bar.Render(w)
 }
 

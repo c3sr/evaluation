@@ -8,9 +8,9 @@ import (
 	"github.com/golang/snappy"
 	"github.com/levigross/grequests"
 	"github.com/pkg/errors"
-	"github.com/rai-project/database"
-	"github.com/rai-project/database/mongodb"
-	"github.com/rai-project/tracer"
+	"github.com/c3sr/database"
+	"github.com/c3sr/database/mongodb"
+	"github.com/c3sr/tracer"
 	model "github.com/uber/jaeger/model/json"
 	"gopkg.in/mgo.v2/bson"
 )

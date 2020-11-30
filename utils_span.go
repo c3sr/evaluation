@@ -3,7 +3,7 @@ package evaluation
 import (
 	"strings"
 
-	"github.com/rai-project/config"
+	"github.com/c3sr/config"
 	"github.com/spf13/cast"
 	model "github.com/uber/jaeger/model/json"
 )

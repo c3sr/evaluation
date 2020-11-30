@@ -4,13 +4,13 @@ package evaluation
 
 import (
 	json "encoding/json"
+	dlframework "github.com/c3sr/dlframework"
+	eventflow "github.com/c3sr/evaluation/eventflow"
+	machine "github.com/c3sr/machine"
+	nvidia_smi "github.com/c3sr/nvidia-smi"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
-	dlframework "github.com/c3sr/dlframework"
-	eventflow "github.com/c3sr/evaluation/eventflow"
-	machine "github.com/rai-project/machine"
-	nvidia_smi "github.com/rai-project/nvidia-smi"
 	json1 "github.com/uber/jaeger/model/json"
 	bson "gopkg.in/mgo.v2/bson"
 )
@@ -23,7 +23,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation(in *jlexer.Lexer, out *structuredError) {
+func easyjson679db3deDecodeGithubComC3srEvaluation(in *jlexer.Lexer, out *structuredError) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -34,7 +34,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation(in *jlexer.Lexer, out *
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -62,7 +62,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation(out *jwriter.Writer, in structuredError) {
+func easyjson679db3deEncodeGithubComC3srEvaluation(out *jwriter.Writer, in structuredError) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -98,27 +98,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation(out *jwriter.Writer, in
 // MarshalJSON supports json.Marshaler interface
 func (v structuredError) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v structuredError) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *structuredError) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *structuredError) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation1(in *jlexer.Lexer, out *TraceInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation1(in *jlexer.Lexer, out *TraceInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -129,7 +129,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation1(in *jlexer.Lexer, out 
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -145,7 +145,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation1(in *jlexer.Lexer, out 
 				in.Delim('[')
 				if out.Traces == nil {
 					if !in.IsDelim(']') {
-						out.Traces = make([]json1.Trace, 0, 1)
+						out.Traces = make([]json1.Trace, 0, 0)
 					} else {
 						out.Traces = []json1.Trace{}
 					}
@@ -154,7 +154,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation1(in *jlexer.Lexer, out 
 				}
 				for !in.IsDelim(']') {
 					var v1 json1.Trace
-					easyjson679db3deDecodeGithubComUberJaegerModelJson(in, &v1)
+					easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson(in, &v1)
 					out.Traces = append(out.Traces, v1)
 					in.WantComma()
 				}
@@ -183,7 +183,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation1(in *jlexer.Lexer, out 
 				}
 				for !in.IsDelim(']') {
 					var v2 structuredError
-					(v2).UnmarshalEasyJSON(in)
+					if data := in.Raw(); in.Ok() {
+						in.AddError((v2).UnmarshalJSON(data))
+					}
 					out.Errors = append(out.Errors, v2)
 					in.WantComma()
 				}
@@ -203,7 +205,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation1(in *jlexer.Lexer, out 
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation1(out *jwriter.Writer, in TraceInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation1(out *jwriter.Writer, in TraceInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -217,7 +219,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation1(out *jwriter.Writer, i
 				if v3 > 0 {
 					out.RawByte(',')
 				}
-				easyjson679db3deEncodeGithubComUberJaegerModelJson(out, v4)
+				easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson(out, v4)
 			}
 			out.RawByte(']')
 		}
@@ -266,7 +268,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation1(out *jwriter.Writer, i
 				if v5 > 0 {
 					out.RawByte(',')
 				}
-				(v6).MarshalEasyJSON(out)
+				out.Raw((v6).MarshalJSON())
 			}
 			out.RawByte(']')
 		}
@@ -277,27 +279,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation1(out *jwriter.Writer, i
 // MarshalJSON supports json.Marshaler interface
 func (v TraceInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation1(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation1(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v TraceInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation1(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation1(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *TraceInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation1(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation1(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *TraceInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation1(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation1(l, v)
 }
-func easyjson679db3deDecodeGithubComUberJaegerModelJson(in *jlexer.Lexer, out *json1.Trace) {
+func easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson(in *jlexer.Lexer, out *json1.Trace) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -308,7 +310,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson(in *jlexer.Lexer, out *j
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -326,7 +328,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson(in *jlexer.Lexer, out *j
 				in.Delim('[')
 				if out.Spans == nil {
 					if !in.IsDelim(']') {
-						out.Spans = make([]json1.Span, 0, 1)
+						out.Spans = make([]json1.Span, 0, 0)
 					} else {
 						out.Spans = []json1.Span{}
 					}
@@ -335,7 +337,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson(in *jlexer.Lexer, out *j
 				}
 				for !in.IsDelim(']') {
 					var v7 json1.Span
-					easyjson679db3deDecodeGithubComUberJaegerModelJson1(in, &v7)
+					easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson1(in, &v7)
 					out.Spans = append(out.Spans, v7)
 					in.WantComma()
 				}
@@ -346,16 +348,12 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson(in *jlexer.Lexer, out *j
 				in.Skip()
 			} else {
 				in.Delim('{')
-				if !in.IsDelim('}') {
-					out.Processes = make(map[json1.ProcessID]json1.Process)
-				} else {
-					out.Processes = nil
-				}
+				out.Processes = make(map[json1.ProcessID]json1.Process)
 				for !in.IsDelim('}') {
 					key := json1.ProcessID(in.String())
 					in.WantColon()
 					var v8 json1.Process
-					easyjson679db3deDecodeGithubComUberJaegerModelJson2(in, &v8)
+					easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson2(in, &v8)
 					(out.Processes)[key] = v8
 					in.WantComma()
 				}
@@ -398,7 +396,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson(in *jlexer.Lexer, out *j
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComUberJaegerModelJson(out *jwriter.Writer, in json1.Trace) {
+func easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson(out *jwriter.Writer, in json1.Trace) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -418,7 +416,7 @@ func easyjson679db3deEncodeGithubComUberJaegerModelJson(out *jwriter.Writer, in 
 				if v10 > 0 {
 					out.RawByte(',')
 				}
-				easyjson679db3deEncodeGithubComUberJaegerModelJson1(out, v11)
+				easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson1(out, v11)
 			}
 			out.RawByte(']')
 		}
@@ -439,7 +437,7 @@ func easyjson679db3deEncodeGithubComUberJaegerModelJson(out *jwriter.Writer, in 
 				}
 				out.String(string(v12Name))
 				out.RawByte(':')
-				easyjson679db3deEncodeGithubComUberJaegerModelJson2(out, v12Value)
+				easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson2(out, v12Value)
 			}
 			out.RawByte('}')
 		}
@@ -462,7 +460,7 @@ func easyjson679db3deEncodeGithubComUberJaegerModelJson(out *jwriter.Writer, in 
 	}
 	out.RawByte('}')
 }
-func easyjson679db3deDecodeGithubComUberJaegerModelJson2(in *jlexer.Lexer, out *json1.Process) {
+func easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson2(in *jlexer.Lexer, out *json1.Process) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -473,7 +471,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson2(in *jlexer.Lexer, out *
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -500,7 +498,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson2(in *jlexer.Lexer, out *
 				}
 				for !in.IsDelim(']') {
 					var v15 json1.KeyValue
-					easyjson679db3deDecodeGithubComUberJaegerModelJson3(in, &v15)
+					easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson3(in, &v15)
 					out.Tags = append(out.Tags, v15)
 					in.WantComma()
 				}
@@ -520,7 +518,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson2(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComUberJaegerModelJson2(out *jwriter.Writer, in json1.Process) {
+func easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson2(out *jwriter.Writer, in json1.Process) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -540,14 +538,14 @@ func easyjson679db3deEncodeGithubComUberJaegerModelJson2(out *jwriter.Writer, in
 				if v16 > 0 {
 					out.RawByte(',')
 				}
-				easyjson679db3deEncodeGithubComUberJaegerModelJson3(out, v17)
+				easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson3(out, v17)
 			}
 			out.RawByte(']')
 		}
 	}
 	out.RawByte('}')
 }
-func easyjson679db3deDecodeGithubComUberJaegerModelJson3(in *jlexer.Lexer, out *json1.KeyValue) {
+func easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson3(in *jlexer.Lexer, out *json1.KeyValue) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -558,7 +556,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson3(in *jlexer.Lexer, out *
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -592,7 +590,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson3(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComUberJaegerModelJson3(out *jwriter.Writer, in json1.KeyValue) {
+func easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson3(out *jwriter.Writer, in json1.KeyValue) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -619,7 +617,7 @@ func easyjson679db3deEncodeGithubComUberJaegerModelJson3(out *jwriter.Writer, in
 	}
 	out.RawByte('}')
 }
-func easyjson679db3deDecodeGithubComUberJaegerModelJson1(in *jlexer.Lexer, out *json1.Span) {
+func easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson1(in *jlexer.Lexer, out *json1.Span) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -630,7 +628,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson1(in *jlexer.Lexer, out *
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -665,7 +663,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson1(in *jlexer.Lexer, out *
 				}
 				for !in.IsDelim(']') {
 					var v18 json1.Reference
-					easyjson679db3deDecodeGithubComUberJaegerModelJson4(in, &v18)
+					easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson4(in, &v18)
 					out.References = append(out.References, v18)
 					in.WantComma()
 				}
@@ -692,7 +690,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson1(in *jlexer.Lexer, out *
 				}
 				for !in.IsDelim(']') {
 					var v19 json1.KeyValue
-					easyjson679db3deDecodeGithubComUberJaegerModelJson3(in, &v19)
+					easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson3(in, &v19)
 					out.Tags = append(out.Tags, v19)
 					in.WantComma()
 				}
@@ -715,7 +713,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson1(in *jlexer.Lexer, out *
 				}
 				for !in.IsDelim(']') {
 					var v20 json1.Log
-					easyjson679db3deDecodeGithubComUberJaegerModelJson5(in, &v20)
+					easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson5(in, &v20)
 					out.Logs = append(out.Logs, v20)
 					in.WantComma()
 				}
@@ -731,7 +729,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson1(in *jlexer.Lexer, out *
 				if out.Process == nil {
 					out.Process = new(json1.Process)
 				}
-				easyjson679db3deDecodeGithubComUberJaegerModelJson2(in, out.Process)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson2(in, out.Process)
 			}
 		case "warnings":
 			if in.IsNull() {
@@ -770,7 +768,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson1(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComUberJaegerModelJson1(out *jwriter.Writer, in json1.Span) {
+func easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson1(out *jwriter.Writer, in json1.Span) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -810,7 +808,7 @@ func easyjson679db3deEncodeGithubComUberJaegerModelJson1(out *jwriter.Writer, in
 				if v22 > 0 {
 					out.RawByte(',')
 				}
-				easyjson679db3deEncodeGithubComUberJaegerModelJson4(out, v23)
+				easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson4(out, v23)
 			}
 			out.RawByte(']')
 		}
@@ -836,7 +834,7 @@ func easyjson679db3deEncodeGithubComUberJaegerModelJson1(out *jwriter.Writer, in
 				if v24 > 0 {
 					out.RawByte(',')
 				}
-				easyjson679db3deEncodeGithubComUberJaegerModelJson3(out, v25)
+				easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson3(out, v25)
 			}
 			out.RawByte(']')
 		}
@@ -852,7 +850,7 @@ func easyjson679db3deEncodeGithubComUberJaegerModelJson1(out *jwriter.Writer, in
 				if v26 > 0 {
 					out.RawByte(',')
 				}
-				easyjson679db3deEncodeGithubComUberJaegerModelJson5(out, v27)
+				easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson5(out, v27)
 			}
 			out.RawByte(']')
 		}
@@ -865,7 +863,7 @@ func easyjson679db3deEncodeGithubComUberJaegerModelJson1(out *jwriter.Writer, in
 	if in.Process != nil {
 		const prefix string = ",\"process\":"
 		out.RawString(prefix)
-		easyjson679db3deEncodeGithubComUberJaegerModelJson2(out, *in.Process)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson2(out, *in.Process)
 	}
 	{
 		const prefix string = ",\"warnings\":"
@@ -885,7 +883,7 @@ func easyjson679db3deEncodeGithubComUberJaegerModelJson1(out *jwriter.Writer, in
 	}
 	out.RawByte('}')
 }
-func easyjson679db3deDecodeGithubComUberJaegerModelJson5(in *jlexer.Lexer, out *json1.Log) {
+func easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson5(in *jlexer.Lexer, out *json1.Log) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -896,7 +894,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson5(in *jlexer.Lexer, out *
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -923,7 +921,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson5(in *jlexer.Lexer, out *
 				}
 				for !in.IsDelim(']') {
 					var v30 json1.KeyValue
-					easyjson679db3deDecodeGithubComUberJaegerModelJson3(in, &v30)
+					easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson3(in, &v30)
 					out.Fields = append(out.Fields, v30)
 					in.WantComma()
 				}
@@ -943,7 +941,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson5(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComUberJaegerModelJson5(out *jwriter.Writer, in json1.Log) {
+func easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson5(out *jwriter.Writer, in json1.Log) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -963,14 +961,14 @@ func easyjson679db3deEncodeGithubComUberJaegerModelJson5(out *jwriter.Writer, in
 				if v31 > 0 {
 					out.RawByte(',')
 				}
-				easyjson679db3deEncodeGithubComUberJaegerModelJson3(out, v32)
+				easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson3(out, v32)
 			}
 			out.RawByte(']')
 		}
 	}
 	out.RawByte('}')
 }
-func easyjson679db3deDecodeGithubComUberJaegerModelJson4(in *jlexer.Lexer, out *json1.Reference) {
+func easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson4(in *jlexer.Lexer, out *json1.Reference) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -981,7 +979,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson4(in *jlexer.Lexer, out *
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -1009,7 +1007,7 @@ func easyjson679db3deDecodeGithubComUberJaegerModelJson4(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComUberJaegerModelJson4(out *jwriter.Writer, in json1.Reference) {
+func easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComUberJaegerModelJson4(out *jwriter.Writer, in json1.Reference) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -1030,7 +1028,7 @@ func easyjson679db3deEncodeGithubComUberJaegerModelJson4(out *jwriter.Writer, in
 	}
 	out.RawByte('}')
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation2(in *jlexer.Lexer, out *SystemMemoryInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation2(in *jlexer.Lexer, out *SystemMemoryInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -1041,7 +1039,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation2(in *jlexer.Lexer, out 
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -1075,7 +1073,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation2(in *jlexer.Lexer, out 
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation2(out *jwriter.Writer, in SystemMemoryInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation2(out *jwriter.Writer, in SystemMemoryInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -1141,27 +1139,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation2(out *jwriter.Writer, i
 // MarshalJSON supports json.Marshaler interface
 func (v SystemMemoryInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation2(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation2(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SystemMemoryInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation2(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation2(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SystemMemoryInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation2(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation2(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SystemMemoryInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation2(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation2(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation3(in *jlexer.Lexer, out *SummaryModelInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation3(in *jlexer.Lexer, out *SummaryModelInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -1172,7 +1170,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation3(in *jlexer.Lexer, out 
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -1249,7 +1247,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation3(in *jlexer.Lexer, out 
 				if out.MachineInformation == nil {
 					out.MachineInformation = new(machine.Machine)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectMachine(in, out.MachineInformation)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine(in, out.MachineInformation)
 			}
 		case "gpu_driver":
 			if in.IsNull() {
@@ -1279,7 +1277,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation3(in *jlexer.Lexer, out 
 				if out.GPUInformation == nil {
 					out.GPUInformation = new(nvidia_smi.GPU)
 				}
-				(*out.GPUInformation).UnmarshalEasyJSON(in)
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.GPUInformation).UnmarshalJSON(data))
+				}
 			}
 		case "interconnect_name":
 			out.InterconnectName = string(in.String())
@@ -1305,7 +1305,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation3(in *jlexer.Lexer, out 
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation3(out *jwriter.Writer, in SummaryModelInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation3(out *jwriter.Writer, in SummaryModelInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -1427,7 +1427,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation3(out *jwriter.Writer, i
 	if in.MachineInformation != nil {
 		const prefix string = ",\"machine_information\":"
 		out.RawString(prefix)
-		easyjson679db3deEncodeGithubComRaiProjectMachine(out, *in.MachineInformation)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine(out, *in.MachineInformation)
 	}
 	if in.GPUDriverVersion != nil {
 		const prefix string = ",\"gpu_driver\":"
@@ -1442,7 +1442,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation3(out *jwriter.Writer, i
 	if in.GPUInformation != nil {
 		const prefix string = ",\"gpu_information\":"
 		out.RawString(prefix)
-		(*in.GPUInformation).MarshalEasyJSON(out)
+		out.Raw((*in.GPUInformation).MarshalJSON())
 	}
 	if in.InterconnectName != "" {
 		const prefix string = ",\"interconnect_name\":"
@@ -1475,27 +1475,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation3(out *jwriter.Writer, i
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryModelInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation3(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation3(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryModelInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation3(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation3(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryModelInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation3(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation3(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryModelInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation3(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation3(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectMachine(in *jlexer.Lexer, out *machine.Machine) {
+func easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine(in *jlexer.Lexer, out *machine.Machine) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -1506,7 +1506,7 @@ func easyjson679db3deDecodeGithubComRaiProjectMachine(in *jlexer.Lexer, out *mac
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -1587,7 +1587,7 @@ func easyjson679db3deDecodeGithubComRaiProjectMachine(in *jlexer.Lexer, out *mac
 						if v37 == nil {
 							v37 = new(machine.CPU)
 						}
-						easyjson679db3deDecodeGithubComRaiProjectMachine1(in, v37)
+						easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine1(in, v37)
 					}
 					out.CPU = append(out.CPU, v37)
 					in.WantComma()
@@ -1608,7 +1608,7 @@ func easyjson679db3deDecodeGithubComRaiProjectMachine(in *jlexer.Lexer, out *mac
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectMachine(out *jwriter.Writer, in machine.Machine) {
+func easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine(out *jwriter.Writer, in machine.Machine) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -1774,7 +1774,7 @@ func easyjson679db3deEncodeGithubComRaiProjectMachine(out *jwriter.Writer, in ma
 				if v41 == nil {
 					out.RawString("null")
 				} else {
-					easyjson679db3deEncodeGithubComRaiProjectMachine1(out, *v41)
+					easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine1(out, *v41)
 				}
 			}
 			out.RawByte(']')
@@ -1782,7 +1782,7 @@ func easyjson679db3deEncodeGithubComRaiProjectMachine(out *jwriter.Writer, in ma
 	}
 	out.RawByte('}')
 }
-func easyjson679db3deDecodeGithubComRaiProjectMachine1(in *jlexer.Lexer, out *machine.CPU) {
+func easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine1(in *jlexer.Lexer, out *machine.CPU) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -1793,7 +1793,7 @@ func easyjson679db3deDecodeGithubComRaiProjectMachine1(in *jlexer.Lexer, out *ma
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -1887,7 +1887,7 @@ func easyjson679db3deDecodeGithubComRaiProjectMachine1(in *jlexer.Lexer, out *ma
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectMachine1(out *jwriter.Writer, in machine.CPU) {
+func easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine1(out *jwriter.Writer, in machine.CPU) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -2057,7 +2057,7 @@ func easyjson679db3deEncodeGithubComRaiProjectMachine1(out *jwriter.Writer, in m
 	}
 	out.RawByte('}')
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation4(in *jlexer.Lexer, out *SummaryModelAccuracyInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation4(in *jlexer.Lexer, out *SummaryModelAccuracyInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -2068,7 +2068,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation4(in *jlexer.Lexer, out 
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -2120,7 +2120,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation4(in *jlexer.Lexer, out 
 				if out.MachineInformation == nil {
 					out.MachineInformation = new(machine.Machine)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectMachine(in, out.MachineInformation)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine(in, out.MachineInformation)
 			}
 		case "gpu_driver":
 			if in.IsNull() {
@@ -2150,7 +2150,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation4(in *jlexer.Lexer, out 
 				if out.GPUInformation == nil {
 					out.GPUInformation = new(nvidia_smi.GPU)
 				}
-				(*out.GPUInformation).UnmarshalEasyJSON(in)
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.GPUInformation).UnmarshalJSON(data))
+				}
 			}
 		case "interconnect_name":
 			out.InterconnectName = string(in.String())
@@ -2176,7 +2178,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation4(in *jlexer.Lexer, out 
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation4(out *jwriter.Writer, in SummaryModelAccuracyInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation4(out *jwriter.Writer, in SummaryModelAccuracyInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -2269,7 +2271,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation4(out *jwriter.Writer, i
 	if in.MachineInformation != nil {
 		const prefix string = ",\"machine_information\":"
 		out.RawString(prefix)
-		easyjson679db3deEncodeGithubComRaiProjectMachine(out, *in.MachineInformation)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine(out, *in.MachineInformation)
 	}
 	if in.GPUDriverVersion != nil {
 		const prefix string = ",\"gpu_driver\":"
@@ -2284,7 +2286,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation4(out *jwriter.Writer, i
 	if in.GPUInformation != nil {
 		const prefix string = ",\"gpu_information\":"
 		out.RawString(prefix)
-		(*in.GPUInformation).MarshalEasyJSON(out)
+		out.Raw((*in.GPUInformation).MarshalJSON())
 	}
 	if in.InterconnectName != "" {
 		const prefix string = ",\"interconnect_name\":"
@@ -2317,27 +2319,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation4(out *jwriter.Writer, i
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryModelAccuracyInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation4(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation4(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryModelAccuracyInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation4(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation4(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryModelAccuracyInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation4(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation4(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryModelAccuracyInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation4(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation4(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation5(in *jlexer.Lexer, out *SummaryMemoryInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation5(in *jlexer.Lexer, out *SummaryMemoryInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -2348,7 +2350,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation5(in *jlexer.Lexer, out 
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -2364,7 +2366,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation5(in *jlexer.Lexer, out 
 				in.Delim('[')
 				if out.MemoryInformations == nil {
 					if !in.IsDelim(']') {
-						out.MemoryInformations = make([]MemoryInformation, 0, 1)
+						out.MemoryInformations = make([]MemoryInformation, 0, 0)
 					} else {
 						out.MemoryInformations = []MemoryInformation{}
 					}
@@ -2373,7 +2375,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation5(in *jlexer.Lexer, out 
 				}
 				for !in.IsDelim(']') {
 					var v48 MemoryInformation
-					(v48).UnmarshalEasyJSON(in)
+					if data := in.Raw(); in.Ok() {
+						in.AddError((v48).UnmarshalJSON(data))
+					}
 					out.MemoryInformations = append(out.MemoryInformations, v48)
 					in.WantComma()
 				}
@@ -2419,7 +2423,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation5(in *jlexer.Lexer, out 
 				if out.MachineInformation == nil {
 					out.MachineInformation = new(machine.Machine)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectMachine(in, out.MachineInformation)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine(in, out.MachineInformation)
 			}
 		case "gpu_driver":
 			if in.IsNull() {
@@ -2449,7 +2453,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation5(in *jlexer.Lexer, out 
 				if out.GPUInformation == nil {
 					out.GPUInformation = new(nvidia_smi.GPU)
 				}
-				(*out.GPUInformation).UnmarshalEasyJSON(in)
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.GPUInformation).UnmarshalJSON(data))
+				}
 			}
 		case "interconnect_name":
 			out.InterconnectName = string(in.String())
@@ -2475,7 +2481,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation5(in *jlexer.Lexer, out 
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation5(out *jwriter.Writer, in SummaryMemoryInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation5(out *jwriter.Writer, in SummaryMemoryInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -2489,7 +2495,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation5(out *jwriter.Writer, i
 				if v49 > 0 {
 					out.RawByte(',')
 				}
-				(v50).MarshalEasyJSON(out)
+				out.Raw((v50).MarshalJSON())
 			}
 			out.RawByte(']')
 		}
@@ -2567,7 +2573,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation5(out *jwriter.Writer, i
 	if in.MachineInformation != nil {
 		const prefix string = ",\"machine_information\":"
 		out.RawString(prefix)
-		easyjson679db3deEncodeGithubComRaiProjectMachine(out, *in.MachineInformation)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine(out, *in.MachineInformation)
 	}
 	if in.GPUDriverVersion != nil {
 		const prefix string = ",\"gpu_driver\":"
@@ -2582,7 +2588,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation5(out *jwriter.Writer, i
 	if in.GPUInformation != nil {
 		const prefix string = ",\"gpu_information\":"
 		out.RawString(prefix)
-		(*in.GPUInformation).MarshalEasyJSON(out)
+		out.Raw((*in.GPUInformation).MarshalJSON())
 	}
 	if in.InterconnectName != "" {
 		const prefix string = ",\"interconnect_name\":"
@@ -2615,27 +2621,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation5(out *jwriter.Writer, i
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryMemoryInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation5(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation5(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryMemoryInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation5(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation5(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryMemoryInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation5(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation5(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryMemoryInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation5(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation5(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation6(in *jlexer.Lexer, out *SummaryMeanLayerInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation6(in *jlexer.Lexer, out *SummaryMeanLayerInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -2646,7 +2652,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation6(in *jlexer.Lexer, out 
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -2896,7 +2902,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation6(in *jlexer.Lexer, out 
 				if out.MachineInformation == nil {
 					out.MachineInformation = new(machine.Machine)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectMachine(in, out.MachineInformation)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine(in, out.MachineInformation)
 			}
 		case "gpu_driver":
 			if in.IsNull() {
@@ -2926,7 +2932,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation6(in *jlexer.Lexer, out 
 				if out.GPUInformation == nil {
 					out.GPUInformation = new(nvidia_smi.GPU)
 				}
-				(*out.GPUInformation).UnmarshalEasyJSON(in)
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.GPUInformation).UnmarshalJSON(data))
+				}
 			}
 		case "interconnect_name":
 			out.InterconnectName = string(in.String())
@@ -2952,7 +2960,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation6(in *jlexer.Lexer, out 
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation6(out *jwriter.Writer, in SummaryMeanLayerInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation6(out *jwriter.Writer, in SummaryMeanLayerInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -3267,7 +3275,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation6(out *jwriter.Writer, i
 	if in.MachineInformation != nil {
 		const prefix string = ",\"machine_information\":"
 		out.RawString(prefix)
-		easyjson679db3deEncodeGithubComRaiProjectMachine(out, *in.MachineInformation)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine(out, *in.MachineInformation)
 	}
 	if in.GPUDriverVersion != nil {
 		const prefix string = ",\"gpu_driver\":"
@@ -3282,7 +3290,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation6(out *jwriter.Writer, i
 	if in.GPUInformation != nil {
 		const prefix string = ",\"gpu_information\":"
 		out.RawString(prefix)
-		(*in.GPUInformation).MarshalEasyJSON(out)
+		out.Raw((*in.GPUInformation).MarshalJSON())
 	}
 	if in.InterconnectName != "" {
 		const prefix string = ",\"interconnect_name\":"
@@ -3315,27 +3323,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation6(out *jwriter.Writer, i
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryMeanLayerInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation6(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation6(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryMeanLayerInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation6(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation6(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryMeanLayerInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation6(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation6(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryMeanLayerInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation6(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation6(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation7(in *jlexer.Lexer, out *SummaryLayerLatencyInformations) {
+func easyjson679db3deDecodeGithubComC3srEvaluation7(in *jlexer.Lexer, out *SummaryLayerLatencyInformations) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		in.Skip()
@@ -3344,7 +3352,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation7(in *jlexer.Lexer, out 
 		in.Delim('[')
 		if *out == nil {
 			if !in.IsDelim(']') {
-				*out = make(SummaryLayerLatencyInformations, 0, 1)
+				*out = make(SummaryLayerLatencyInformations, 0, 0)
 			} else {
 				*out = SummaryLayerLatencyInformations{}
 			}
@@ -3353,7 +3361,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation7(in *jlexer.Lexer, out 
 		}
 		for !in.IsDelim(']') {
 			var v75 SummaryLayerInformation
-			(v75).UnmarshalEasyJSON(in)
+			if data := in.Raw(); in.Ok() {
+				in.AddError((v75).UnmarshalJSON(data))
+			}
 			*out = append(*out, v75)
 			in.WantComma()
 		}
@@ -3363,7 +3373,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation7(in *jlexer.Lexer, out 
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation7(out *jwriter.Writer, in SummaryLayerLatencyInformations) {
+func easyjson679db3deEncodeGithubComC3srEvaluation7(out *jwriter.Writer, in SummaryLayerLatencyInformations) {
 	if in == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 		out.RawString("null")
 	} else {
@@ -3372,7 +3382,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation7(out *jwriter.Writer, i
 			if v76 > 0 {
 				out.RawByte(',')
 			}
-			(v77).MarshalEasyJSON(out)
+			out.Raw((v77).MarshalJSON())
 		}
 		out.RawByte(']')
 	}
@@ -3381,27 +3391,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation7(out *jwriter.Writer, i
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryLayerLatencyInformations) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation7(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation7(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryLayerLatencyInformations) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation7(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation7(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryLayerLatencyInformations) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation7(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation7(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryLayerLatencyInformations) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation7(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation7(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation8(in *jlexer.Lexer, out *SummaryLayerInformations) {
+func easyjson679db3deDecodeGithubComC3srEvaluation8(in *jlexer.Lexer, out *SummaryLayerInformations) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		in.Skip()
@@ -3410,7 +3420,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation8(in *jlexer.Lexer, out 
 		in.Delim('[')
 		if *out == nil {
 			if !in.IsDelim(']') {
-				*out = make(SummaryLayerInformations, 0, 1)
+				*out = make(SummaryLayerInformations, 0, 0)
 			} else {
 				*out = SummaryLayerInformations{}
 			}
@@ -3419,7 +3429,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation8(in *jlexer.Lexer, out 
 		}
 		for !in.IsDelim(']') {
 			var v78 SummaryLayerInformation
-			(v78).UnmarshalEasyJSON(in)
+			if data := in.Raw(); in.Ok() {
+				in.AddError((v78).UnmarshalJSON(data))
+			}
 			*out = append(*out, v78)
 			in.WantComma()
 		}
@@ -3429,7 +3441,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation8(in *jlexer.Lexer, out 
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation8(out *jwriter.Writer, in SummaryLayerInformations) {
+func easyjson679db3deEncodeGithubComC3srEvaluation8(out *jwriter.Writer, in SummaryLayerInformations) {
 	if in == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 		out.RawString("null")
 	} else {
@@ -3438,7 +3450,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation8(out *jwriter.Writer, i
 			if v79 > 0 {
 				out.RawByte(',')
 			}
-			(v80).MarshalEasyJSON(out)
+			out.Raw((v80).MarshalJSON())
 		}
 		out.RawByte(']')
 	}
@@ -3447,27 +3459,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation8(out *jwriter.Writer, i
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryLayerInformations) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation8(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation8(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryLayerInformations) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation8(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation8(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryLayerInformations) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation8(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation8(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryLayerInformations) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation8(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation8(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation9(in *jlexer.Lexer, out *SummaryLayerInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation9(in *jlexer.Lexer, out *SummaryLayerInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -3478,7 +3490,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation9(in *jlexer.Lexer, out 
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -3728,7 +3740,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation9(in *jlexer.Lexer, out 
 				if out.MachineInformation == nil {
 					out.MachineInformation = new(machine.Machine)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectMachine(in, out.MachineInformation)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine(in, out.MachineInformation)
 			}
 		case "gpu_driver":
 			if in.IsNull() {
@@ -3758,7 +3770,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation9(in *jlexer.Lexer, out 
 				if out.GPUInformation == nil {
 					out.GPUInformation = new(nvidia_smi.GPU)
 				}
-				(*out.GPUInformation).UnmarshalEasyJSON(in)
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.GPUInformation).UnmarshalJSON(data))
+				}
 			}
 		case "interconnect_name":
 			out.InterconnectName = string(in.String())
@@ -3784,7 +3798,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation9(in *jlexer.Lexer, out 
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation9(out *jwriter.Writer, in SummaryLayerInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation9(out *jwriter.Writer, in SummaryLayerInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -4099,7 +4113,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation9(out *jwriter.Writer, i
 	if in.MachineInformation != nil {
 		const prefix string = ",\"machine_information\":"
 		out.RawString(prefix)
-		easyjson679db3deEncodeGithubComRaiProjectMachine(out, *in.MachineInformation)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine(out, *in.MachineInformation)
 	}
 	if in.GPUDriverVersion != nil {
 		const prefix string = ",\"gpu_driver\":"
@@ -4114,7 +4128,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation9(out *jwriter.Writer, i
 	if in.GPUInformation != nil {
 		const prefix string = ",\"gpu_information\":"
 		out.RawString(prefix)
-		(*in.GPUInformation).MarshalEasyJSON(out)
+		out.Raw((*in.GPUInformation).MarshalJSON())
 	}
 	if in.InterconnectName != "" {
 		const prefix string = ",\"interconnect_name\":"
@@ -4147,27 +4161,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation9(out *jwriter.Writer, i
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryLayerInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation9(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation9(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryLayerInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation9(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation9(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryLayerInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation9(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation9(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryLayerInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation9(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation9(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation10(in *jlexer.Lexer, out *SummaryLayerAllocatedMemoryInformations) {
+func easyjson679db3deDecodeGithubComC3srEvaluation10(in *jlexer.Lexer, out *SummaryLayerAllocatedMemoryInformations) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		in.Skip()
@@ -4176,7 +4190,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation10(in *jlexer.Lexer, out
 		in.Delim('[')
 		if *out == nil {
 			if !in.IsDelim(']') {
-				*out = make(SummaryLayerAllocatedMemoryInformations, 0, 1)
+				*out = make(SummaryLayerAllocatedMemoryInformations, 0, 0)
 			} else {
 				*out = SummaryLayerAllocatedMemoryInformations{}
 			}
@@ -4185,7 +4199,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation10(in *jlexer.Lexer, out
 		}
 		for !in.IsDelim(']') {
 			var v105 SummaryLayerInformation
-			(v105).UnmarshalEasyJSON(in)
+			if data := in.Raw(); in.Ok() {
+				in.AddError((v105).UnmarshalJSON(data))
+			}
 			*out = append(*out, v105)
 			in.WantComma()
 		}
@@ -4195,7 +4211,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation10(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation10(out *jwriter.Writer, in SummaryLayerAllocatedMemoryInformations) {
+func easyjson679db3deEncodeGithubComC3srEvaluation10(out *jwriter.Writer, in SummaryLayerAllocatedMemoryInformations) {
 	if in == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 		out.RawString("null")
 	} else {
@@ -4204,7 +4220,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation10(out *jwriter.Writer, 
 			if v106 > 0 {
 				out.RawByte(',')
 			}
-			(v107).MarshalEasyJSON(out)
+			out.Raw((v107).MarshalJSON())
 		}
 		out.RawByte(']')
 	}
@@ -4213,27 +4229,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation10(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryLayerAllocatedMemoryInformations) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation10(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation10(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryLayerAllocatedMemoryInformations) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation10(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation10(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryLayerAllocatedMemoryInformations) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation10(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation10(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryLayerAllocatedMemoryInformations) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation10(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation10(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation11(in *jlexer.Lexer, out *SummaryLayerAggreOccurrenceInformations) {
+func easyjson679db3deDecodeGithubComC3srEvaluation11(in *jlexer.Lexer, out *SummaryLayerAggreOccurrenceInformations) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		in.Skip()
@@ -4242,7 +4258,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation11(in *jlexer.Lexer, out
 		in.Delim('[')
 		if *out == nil {
 			if !in.IsDelim(']') {
-				*out = make(SummaryLayerAggreOccurrenceInformations, 0, 1)
+				*out = make(SummaryLayerAggreOccurrenceInformations, 0, 0)
 			} else {
 				*out = SummaryLayerAggreOccurrenceInformations{}
 			}
@@ -4251,7 +4267,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation11(in *jlexer.Lexer, out
 		}
 		for !in.IsDelim(']') {
 			var v108 SummaryLayerAggreInformation
-			(v108).UnmarshalEasyJSON(in)
+			if data := in.Raw(); in.Ok() {
+				in.AddError((v108).UnmarshalJSON(data))
+			}
 			*out = append(*out, v108)
 			in.WantComma()
 		}
@@ -4261,7 +4279,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation11(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation11(out *jwriter.Writer, in SummaryLayerAggreOccurrenceInformations) {
+func easyjson679db3deEncodeGithubComC3srEvaluation11(out *jwriter.Writer, in SummaryLayerAggreOccurrenceInformations) {
 	if in == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 		out.RawString("null")
 	} else {
@@ -4270,7 +4288,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation11(out *jwriter.Writer, 
 			if v109 > 0 {
 				out.RawByte(',')
 			}
-			(v110).MarshalEasyJSON(out)
+			out.Raw((v110).MarshalJSON())
 		}
 		out.RawByte(']')
 	}
@@ -4279,27 +4297,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation11(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryLayerAggreOccurrenceInformations) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation11(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation11(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryLayerAggreOccurrenceInformations) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation11(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation11(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryLayerAggreOccurrenceInformations) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation11(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation11(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryLayerAggreOccurrenceInformations) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation11(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation11(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation12(in *jlexer.Lexer, out *SummaryLayerAggreInformations) {
+func easyjson679db3deDecodeGithubComC3srEvaluation12(in *jlexer.Lexer, out *SummaryLayerAggreInformations) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		in.Skip()
@@ -4308,7 +4326,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation12(in *jlexer.Lexer, out
 		in.Delim('[')
 		if *out == nil {
 			if !in.IsDelim(']') {
-				*out = make(SummaryLayerAggreInformations, 0, 1)
+				*out = make(SummaryLayerAggreInformations, 0, 0)
 			} else {
 				*out = SummaryLayerAggreInformations{}
 			}
@@ -4317,7 +4335,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation12(in *jlexer.Lexer, out
 		}
 		for !in.IsDelim(']') {
 			var v111 SummaryLayerAggreInformation
-			(v111).UnmarshalEasyJSON(in)
+			if data := in.Raw(); in.Ok() {
+				in.AddError((v111).UnmarshalJSON(data))
+			}
 			*out = append(*out, v111)
 			in.WantComma()
 		}
@@ -4327,7 +4347,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation12(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation12(out *jwriter.Writer, in SummaryLayerAggreInformations) {
+func easyjson679db3deEncodeGithubComC3srEvaluation12(out *jwriter.Writer, in SummaryLayerAggreInformations) {
 	if in == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 		out.RawString("null")
 	} else {
@@ -4336,7 +4356,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation12(out *jwriter.Writer, 
 			if v112 > 0 {
 				out.RawByte(',')
 			}
-			(v113).MarshalEasyJSON(out)
+			out.Raw((v113).MarshalJSON())
 		}
 		out.RawByte(']')
 	}
@@ -4345,27 +4365,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation12(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryLayerAggreInformations) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation12(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation12(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryLayerAggreInformations) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation12(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation12(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryLayerAggreInformations) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation12(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation12(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryLayerAggreInformations) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation12(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation12(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation13(in *jlexer.Lexer, out *SummaryLayerAggreInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation13(in *jlexer.Lexer, out *SummaryLayerAggreInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -4376,7 +4396,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation13(in *jlexer.Lexer, out
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -4465,7 +4485,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation13(in *jlexer.Lexer, out
 				if out.MachineInformation == nil {
 					out.MachineInformation = new(machine.Machine)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectMachine(in, out.MachineInformation)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine(in, out.MachineInformation)
 			}
 		case "gpu_driver":
 			if in.IsNull() {
@@ -4495,7 +4515,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation13(in *jlexer.Lexer, out
 				if out.GPUInformation == nil {
 					out.GPUInformation = new(nvidia_smi.GPU)
 				}
-				(*out.GPUInformation).UnmarshalEasyJSON(in)
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.GPUInformation).UnmarshalJSON(data))
+				}
 			}
 		case "interconnect_name":
 			out.InterconnectName = string(in.String())
@@ -4521,7 +4543,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation13(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation13(out *jwriter.Writer, in SummaryLayerAggreInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation13(out *jwriter.Writer, in SummaryLayerAggreInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -4703,7 +4725,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation13(out *jwriter.Writer, 
 	if in.MachineInformation != nil {
 		const prefix string = ",\"machine_information\":"
 		out.RawString(prefix)
-		easyjson679db3deEncodeGithubComRaiProjectMachine(out, *in.MachineInformation)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine(out, *in.MachineInformation)
 	}
 	if in.GPUDriverVersion != nil {
 		const prefix string = ",\"gpu_driver\":"
@@ -4718,7 +4740,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation13(out *jwriter.Writer, 
 	if in.GPUInformation != nil {
 		const prefix string = ",\"gpu_information\":"
 		out.RawString(prefix)
-		(*in.GPUInformation).MarshalEasyJSON(out)
+		out.Raw((*in.GPUInformation).MarshalJSON())
 	}
 	if in.InterconnectName != "" {
 		const prefix string = ",\"interconnect_name\":"
@@ -4751,27 +4773,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation13(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryLayerAggreInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation13(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation13(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryLayerAggreInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation13(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation13(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryLayerAggreInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation13(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation13(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryLayerAggreInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation13(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation13(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation14(in *jlexer.Lexer, out *SummaryLayerAggreDurationInformations) {
+func easyjson679db3deDecodeGithubComC3srEvaluation14(in *jlexer.Lexer, out *SummaryLayerAggreDurationInformations) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		in.Skip()
@@ -4780,7 +4802,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation14(in *jlexer.Lexer, out
 		in.Delim('[')
 		if *out == nil {
 			if !in.IsDelim(']') {
-				*out = make(SummaryLayerAggreDurationInformations, 0, 1)
+				*out = make(SummaryLayerAggreDurationInformations, 0, 0)
 			} else {
 				*out = SummaryLayerAggreDurationInformations{}
 			}
@@ -4789,7 +4811,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation14(in *jlexer.Lexer, out
 		}
 		for !in.IsDelim(']') {
 			var v117 SummaryLayerAggreInformation
-			(v117).UnmarshalEasyJSON(in)
+			if data := in.Raw(); in.Ok() {
+				in.AddError((v117).UnmarshalJSON(data))
+			}
 			*out = append(*out, v117)
 			in.WantComma()
 		}
@@ -4799,7 +4823,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation14(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation14(out *jwriter.Writer, in SummaryLayerAggreDurationInformations) {
+func easyjson679db3deEncodeGithubComC3srEvaluation14(out *jwriter.Writer, in SummaryLayerAggreDurationInformations) {
 	if in == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 		out.RawString("null")
 	} else {
@@ -4808,7 +4832,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation14(out *jwriter.Writer, 
 			if v118 > 0 {
 				out.RawByte(',')
 			}
-			(v119).MarshalEasyJSON(out)
+			out.Raw((v119).MarshalJSON())
 		}
 		out.RawByte(']')
 	}
@@ -4817,27 +4841,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation14(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryLayerAggreDurationInformations) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation14(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation14(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryLayerAggreDurationInformations) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation14(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation14(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryLayerAggreDurationInformations) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation14(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation14(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryLayerAggreDurationInformations) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation14(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation14(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation15(in *jlexer.Lexer, out *SummaryLayerAggreAllocatedMemoryInformations) {
+func easyjson679db3deDecodeGithubComC3srEvaluation15(in *jlexer.Lexer, out *SummaryLayerAggreAllocatedMemoryInformations) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		in.Skip()
@@ -4846,7 +4870,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation15(in *jlexer.Lexer, out
 		in.Delim('[')
 		if *out == nil {
 			if !in.IsDelim(']') {
-				*out = make(SummaryLayerAggreAllocatedMemoryInformations, 0, 1)
+				*out = make(SummaryLayerAggreAllocatedMemoryInformations, 0, 0)
 			} else {
 				*out = SummaryLayerAggreAllocatedMemoryInformations{}
 			}
@@ -4855,7 +4879,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation15(in *jlexer.Lexer, out
 		}
 		for !in.IsDelim(']') {
 			var v120 SummaryLayerAggreInformation
-			(v120).UnmarshalEasyJSON(in)
+			if data := in.Raw(); in.Ok() {
+				in.AddError((v120).UnmarshalJSON(data))
+			}
 			*out = append(*out, v120)
 			in.WantComma()
 		}
@@ -4865,7 +4891,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation15(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation15(out *jwriter.Writer, in SummaryLayerAggreAllocatedMemoryInformations) {
+func easyjson679db3deEncodeGithubComC3srEvaluation15(out *jwriter.Writer, in SummaryLayerAggreAllocatedMemoryInformations) {
 	if in == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 		out.RawString("null")
 	} else {
@@ -4874,7 +4900,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation15(out *jwriter.Writer, 
 			if v121 > 0 {
 				out.RawByte(',')
 			}
-			(v122).MarshalEasyJSON(out)
+			out.Raw((v122).MarshalJSON())
 		}
 		out.RawByte(']')
 	}
@@ -4883,27 +4909,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation15(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryLayerAggreAllocatedMemoryInformations) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation15(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation15(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryLayerAggreAllocatedMemoryInformations) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation15(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation15(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryLayerAggreAllocatedMemoryInformations) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation15(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation15(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryLayerAggreAllocatedMemoryInformations) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation15(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation15(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation16(in *jlexer.Lexer, out *SummaryGPUKernelNameAggreInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation16(in *jlexer.Lexer, out *SummaryGPUKernelNameAggreInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -4914,7 +4940,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation16(in *jlexer.Lexer, out
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -5009,7 +5035,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation16(in *jlexer.Lexer, out
 				if out.MachineInformation == nil {
 					out.MachineInformation = new(machine.Machine)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectMachine(in, out.MachineInformation)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine(in, out.MachineInformation)
 			}
 		case "gpu_driver":
 			if in.IsNull() {
@@ -5039,7 +5065,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation16(in *jlexer.Lexer, out
 				if out.GPUInformation == nil {
 					out.GPUInformation = new(nvidia_smi.GPU)
 				}
-				(*out.GPUInformation).UnmarshalEasyJSON(in)
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.GPUInformation).UnmarshalJSON(data))
+				}
 			}
 		case "interconnect_name":
 			out.InterconnectName = string(in.String())
@@ -5065,7 +5093,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation16(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation16(out *jwriter.Writer, in SummaryGPUKernelNameAggreInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation16(out *jwriter.Writer, in SummaryGPUKernelNameAggreInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -5277,7 +5305,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation16(out *jwriter.Writer, 
 	if in.MachineInformation != nil {
 		const prefix string = ",\"machine_information\":"
 		out.RawString(prefix)
-		easyjson679db3deEncodeGithubComRaiProjectMachine(out, *in.MachineInformation)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine(out, *in.MachineInformation)
 	}
 	if in.GPUDriverVersion != nil {
 		const prefix string = ",\"gpu_driver\":"
@@ -5292,7 +5320,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation16(out *jwriter.Writer, 
 	if in.GPUInformation != nil {
 		const prefix string = ",\"gpu_information\":"
 		out.RawString(prefix)
-		(*in.GPUInformation).MarshalEasyJSON(out)
+		out.Raw((*in.GPUInformation).MarshalJSON())
 	}
 	if in.InterconnectName != "" {
 		const prefix string = ",\"interconnect_name\":"
@@ -5325,27 +5353,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation16(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryGPUKernelNameAggreInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation16(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation16(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryGPUKernelNameAggreInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation16(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation16(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryGPUKernelNameAggreInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation16(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation16(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryGPUKernelNameAggreInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation16(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation16(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation17(in *jlexer.Lexer, out *SummaryGPUKernelModelAggreInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation17(in *jlexer.Lexer, out *SummaryGPUKernelModelAggreInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -5356,7 +5384,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation17(in *jlexer.Lexer, out
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -5447,7 +5475,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation17(in *jlexer.Lexer, out
 				if out.MachineInformation == nil {
 					out.MachineInformation = new(machine.Machine)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectMachine(in, out.MachineInformation)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine(in, out.MachineInformation)
 			}
 		case "gpu_driver":
 			if in.IsNull() {
@@ -5477,7 +5505,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation17(in *jlexer.Lexer, out
 				if out.GPUInformation == nil {
 					out.GPUInformation = new(nvidia_smi.GPU)
 				}
-				(*out.GPUInformation).UnmarshalEasyJSON(in)
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.GPUInformation).UnmarshalJSON(data))
+				}
 			}
 		case "interconnect_name":
 			out.InterconnectName = string(in.String())
@@ -5503,7 +5533,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation17(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation17(out *jwriter.Writer, in SummaryGPUKernelModelAggreInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation17(out *jwriter.Writer, in SummaryGPUKernelModelAggreInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -5695,7 +5725,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation17(out *jwriter.Writer, 
 	if in.MachineInformation != nil {
 		const prefix string = ",\"machine_information\":"
 		out.RawString(prefix)
-		easyjson679db3deEncodeGithubComRaiProjectMachine(out, *in.MachineInformation)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine(out, *in.MachineInformation)
 	}
 	if in.GPUDriverVersion != nil {
 		const prefix string = ",\"gpu_driver\":"
@@ -5710,7 +5740,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation17(out *jwriter.Writer, 
 	if in.GPUInformation != nil {
 		const prefix string = ",\"gpu_information\":"
 		out.RawString(prefix)
-		(*in.GPUInformation).MarshalEasyJSON(out)
+		out.Raw((*in.GPUInformation).MarshalJSON())
 	}
 	if in.InterconnectName != "" {
 		const prefix string = ",\"interconnect_name\":"
@@ -5743,27 +5773,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation17(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryGPUKernelModelAggreInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation17(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation17(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryGPUKernelModelAggreInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation17(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation17(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryGPUKernelModelAggreInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation17(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation17(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryGPUKernelModelAggreInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation17(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation17(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation18(in *jlexer.Lexer, out *SummaryGPUKernelLayerInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation18(in *jlexer.Lexer, out *SummaryGPUKernelLayerInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -5774,7 +5804,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation18(in *jlexer.Lexer, out
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -5790,7 +5820,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation18(in *jlexer.Lexer, out
 				in.Delim('[')
 				if out.SummaryGPUKernelInformations == nil {
 					if !in.IsDelim(']') {
-						out.SummaryGPUKernelInformations = make(SummaryGPUKernelInformations, 0, 1)
+						out.SummaryGPUKernelInformations = make(SummaryGPUKernelInformations, 0, 0)
 					} else {
 						out.SummaryGPUKernelInformations = SummaryGPUKernelInformations{}
 					}
@@ -5799,7 +5829,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation18(in *jlexer.Lexer, out
 				}
 				for !in.IsDelim(']') {
 					var v129 SummaryGPUKernelInformation
-					(v129).UnmarshalEasyJSON(in)
+					if data := in.Raw(); in.Ok() {
+						in.AddError((v129).UnmarshalJSON(data))
+					}
 					out.SummaryGPUKernelInformations = append(out.SummaryGPUKernelInformations, v129)
 					in.WantComma()
 				}
@@ -6047,7 +6079,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation18(in *jlexer.Lexer, out
 				if out.MachineInformation == nil {
 					out.MachineInformation = new(machine.Machine)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectMachine(in, out.MachineInformation)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine(in, out.MachineInformation)
 			}
 		case "gpu_driver":
 			if in.IsNull() {
@@ -6077,7 +6109,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation18(in *jlexer.Lexer, out
 				if out.GPUInformation == nil {
 					out.GPUInformation = new(nvidia_smi.GPU)
 				}
-				(*out.GPUInformation).UnmarshalEasyJSON(in)
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.GPUInformation).UnmarshalJSON(data))
+				}
 			}
 		case "interconnect_name":
 			out.InterconnectName = string(in.String())
@@ -6103,7 +6137,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation18(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation18(out *jwriter.Writer, in SummaryGPUKernelLayerInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation18(out *jwriter.Writer, in SummaryGPUKernelLayerInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -6117,7 +6151,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation18(out *jwriter.Writer, 
 				if v138 > 0 {
 					out.RawByte(',')
 				}
-				(v139).MarshalEasyJSON(out)
+				out.Raw((v139).MarshalJSON())
 			}
 			out.RawByte(']')
 		}
@@ -6437,7 +6471,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation18(out *jwriter.Writer, 
 	if in.MachineInformation != nil {
 		const prefix string = ",\"machine_information\":"
 		out.RawString(prefix)
-		easyjson679db3deEncodeGithubComRaiProjectMachine(out, *in.MachineInformation)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine(out, *in.MachineInformation)
 	}
 	if in.GPUDriverVersion != nil {
 		const prefix string = ",\"gpu_driver\":"
@@ -6452,7 +6486,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation18(out *jwriter.Writer, 
 	if in.GPUInformation != nil {
 		const prefix string = ",\"gpu_information\":"
 		out.RawString(prefix)
-		(*in.GPUInformation).MarshalEasyJSON(out)
+		out.Raw((*in.GPUInformation).MarshalJSON())
 	}
 	if in.InterconnectName != "" {
 		const prefix string = ",\"interconnect_name\":"
@@ -6485,27 +6519,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation18(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryGPUKernelLayerInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation18(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation18(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryGPUKernelLayerInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation18(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation18(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryGPUKernelLayerInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation18(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation18(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryGPUKernelLayerInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation18(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation18(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation19(in *jlexer.Lexer, out *SummaryGPUKernelLayerAggreInformations) {
+func easyjson679db3deDecodeGithubComC3srEvaluation19(in *jlexer.Lexer, out *SummaryGPUKernelLayerAggreInformations) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		in.Skip()
@@ -6514,7 +6548,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation19(in *jlexer.Lexer, out
 		in.Delim('[')
 		if *out == nil {
 			if !in.IsDelim(']') {
-				*out = make(SummaryGPUKernelLayerAggreInformations, 0, 1)
+				*out = make(SummaryGPUKernelLayerAggreInformations, 0, 0)
 			} else {
 				*out = SummaryGPUKernelLayerAggreInformations{}
 			}
@@ -6523,7 +6557,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation19(in *jlexer.Lexer, out
 		}
 		for !in.IsDelim(']') {
 			var v156 SummaryGPUKernelLayerAggreInformation
-			(v156).UnmarshalEasyJSON(in)
+			if data := in.Raw(); in.Ok() {
+				in.AddError((v156).UnmarshalJSON(data))
+			}
 			*out = append(*out, v156)
 			in.WantComma()
 		}
@@ -6533,7 +6569,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation19(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation19(out *jwriter.Writer, in SummaryGPUKernelLayerAggreInformations) {
+func easyjson679db3deEncodeGithubComC3srEvaluation19(out *jwriter.Writer, in SummaryGPUKernelLayerAggreInformations) {
 	if in == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
 		out.RawString("null")
 	} else {
@@ -6542,7 +6578,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation19(out *jwriter.Writer, 
 			if v157 > 0 {
 				out.RawByte(',')
 			}
-			(v158).MarshalEasyJSON(out)
+			out.Raw((v158).MarshalJSON())
 		}
 		out.RawByte(']')
 	}
@@ -6551,27 +6587,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation19(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryGPUKernelLayerAggreInformations) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation19(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation19(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryGPUKernelLayerAggreInformations) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation19(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation19(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryGPUKernelLayerAggreInformations) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation19(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation19(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryGPUKernelLayerAggreInformations) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation19(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation19(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation20(in *jlexer.Lexer, out *SummaryGPUKernelLayerAggreInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation20(in *jlexer.Lexer, out *SummaryGPUKernelLayerAggreInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -6582,7 +6618,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation20(in *jlexer.Lexer, out
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -6850,7 +6886,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation20(in *jlexer.Lexer, out
 				if out.MachineInformation == nil {
 					out.MachineInformation = new(machine.Machine)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectMachine(in, out.MachineInformation)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine(in, out.MachineInformation)
 			}
 		case "gpu_driver":
 			if in.IsNull() {
@@ -6880,7 +6916,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation20(in *jlexer.Lexer, out
 				if out.GPUInformation == nil {
 					out.GPUInformation = new(nvidia_smi.GPU)
 				}
-				(*out.GPUInformation).UnmarshalEasyJSON(in)
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.GPUInformation).UnmarshalJSON(data))
+				}
 			}
 		case "interconnect_name":
 			out.InterconnectName = string(in.String())
@@ -6906,7 +6944,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation20(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation20(out *jwriter.Writer, in SummaryGPUKernelLayerAggreInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation20(out *jwriter.Writer, in SummaryGPUKernelLayerAggreInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -7311,7 +7349,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation20(out *jwriter.Writer, 
 	if in.MachineInformation != nil {
 		const prefix string = ",\"machine_information\":"
 		out.RawString(prefix)
-		easyjson679db3deEncodeGithubComRaiProjectMachine(out, *in.MachineInformation)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine(out, *in.MachineInformation)
 	}
 	if in.GPUDriverVersion != nil {
 		const prefix string = ",\"gpu_driver\":"
@@ -7326,7 +7364,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation20(out *jwriter.Writer, 
 	if in.GPUInformation != nil {
 		const prefix string = ",\"gpu_information\":"
 		out.RawString(prefix)
-		(*in.GPUInformation).MarshalEasyJSON(out)
+		out.Raw((*in.GPUInformation).MarshalJSON())
 	}
 	if in.InterconnectName != "" {
 		const prefix string = ",\"interconnect_name\":"
@@ -7359,27 +7397,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation20(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryGPUKernelLayerAggreInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation20(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation20(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryGPUKernelLayerAggreInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation20(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation20(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryGPUKernelLayerAggreInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation20(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation20(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryGPUKernelLayerAggreInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation20(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation20(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation21(in *jlexer.Lexer, out *SummaryGPUKernelInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation21(in *jlexer.Lexer, out *SummaryGPUKernelInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -7390,7 +7428,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation21(in *jlexer.Lexer, out
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -7551,7 +7589,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation21(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation21(out *jwriter.Writer, in SummaryGPUKernelInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation21(out *jwriter.Writer, in SummaryGPUKernelInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -7768,27 +7806,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation21(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryGPUKernelInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation21(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation21(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryGPUKernelInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation21(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation21(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryGPUKernelInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation21(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation21(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryGPUKernelInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation21(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation21(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation22(in *jlexer.Lexer, out *SummaryEventFlow) {
+func easyjson679db3deDecodeGithubComC3srEvaluation22(in *jlexer.Lexer, out *SummaryEventFlow) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -7799,7 +7837,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation22(in *jlexer.Lexer, out
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -7815,7 +7853,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation22(in *jlexer.Lexer, out
 				in.Delim('[')
 				if out.EventFlow == nil {
 					if !in.IsDelim(']') {
-						out.EventFlow = make(eventflow.Events, 0, 1)
+						out.EventFlow = make(eventflow.Events, 0, 0)
 					} else {
 						out.EventFlow = eventflow.Events{}
 					}
@@ -7824,7 +7862,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation22(in *jlexer.Lexer, out
 				}
 				for !in.IsDelim(']') {
 					var v196 eventflow.Event
-					easyjson679db3deDecodeGithubComRaiProjectEvaluationEventflow(in, &v196)
+					easyjson679db3deDecodeGithubComC3srEvaluationEventflow(in, &v196)
 					out.EventFlow = append(out.EventFlow, v196)
 					in.WantComma()
 				}
@@ -7870,7 +7908,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation22(in *jlexer.Lexer, out
 				if out.MachineInformation == nil {
 					out.MachineInformation = new(machine.Machine)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectMachine(in, out.MachineInformation)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine(in, out.MachineInformation)
 			}
 		case "gpu_driver":
 			if in.IsNull() {
@@ -7900,7 +7938,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation22(in *jlexer.Lexer, out
 				if out.GPUInformation == nil {
 					out.GPUInformation = new(nvidia_smi.GPU)
 				}
-				(*out.GPUInformation).UnmarshalEasyJSON(in)
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.GPUInformation).UnmarshalJSON(data))
+				}
 			}
 		case "interconnect_name":
 			out.InterconnectName = string(in.String())
@@ -7926,7 +7966,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation22(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation22(out *jwriter.Writer, in SummaryEventFlow) {
+func easyjson679db3deEncodeGithubComC3srEvaluation22(out *jwriter.Writer, in SummaryEventFlow) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -7940,7 +7980,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation22(out *jwriter.Writer, 
 				if v197 > 0 {
 					out.RawByte(',')
 				}
-				easyjson679db3deEncodeGithubComRaiProjectEvaluationEventflow(out, v198)
+				easyjson679db3deEncodeGithubComC3srEvaluationEventflow(out, v198)
 			}
 			out.RawByte(']')
 		}
@@ -8018,7 +8058,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation22(out *jwriter.Writer, 
 	if in.MachineInformation != nil {
 		const prefix string = ",\"machine_information\":"
 		out.RawString(prefix)
-		easyjson679db3deEncodeGithubComRaiProjectMachine(out, *in.MachineInformation)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine(out, *in.MachineInformation)
 	}
 	if in.GPUDriverVersion != nil {
 		const prefix string = ",\"gpu_driver\":"
@@ -8033,7 +8073,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation22(out *jwriter.Writer, 
 	if in.GPUInformation != nil {
 		const prefix string = ",\"gpu_information\":"
 		out.RawString(prefix)
-		(*in.GPUInformation).MarshalEasyJSON(out)
+		out.Raw((*in.GPUInformation).MarshalJSON())
 	}
 	if in.InterconnectName != "" {
 		const prefix string = ",\"interconnect_name\":"
@@ -8066,27 +8106,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation22(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryEventFlow) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation22(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation22(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryEventFlow) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation22(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation22(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryEventFlow) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation22(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation22(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryEventFlow) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation22(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation22(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluationEventflow(in *jlexer.Lexer, out *eventflow.Event) {
+func easyjson679db3deDecodeGithubComC3srEvaluationEventflow(in *jlexer.Lexer, out *eventflow.Event) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -8097,7 +8137,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluationEventflow(in *jlexer.Lex
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -8151,7 +8191,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluationEventflow(in *jlexer.Lex
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluationEventflow(out *jwriter.Writer, in eventflow.Event) {
+func easyjson679db3deEncodeGithubComC3srEvaluationEventflow(out *jwriter.Writer, in eventflow.Event) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -8201,7 +8241,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluationEventflow(out *jwriter.W
 	}
 	out.RawByte('}')
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation23(in *jlexer.Lexer, out *SummaryBase) {
+func easyjson679db3deDecodeGithubComC3srEvaluation23(in *jlexer.Lexer, out *SummaryBase) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -8212,7 +8252,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation23(in *jlexer.Lexer, out
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -8260,7 +8300,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation23(in *jlexer.Lexer, out
 				if out.MachineInformation == nil {
 					out.MachineInformation = new(machine.Machine)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectMachine(in, out.MachineInformation)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine(in, out.MachineInformation)
 			}
 		case "gpu_driver":
 			if in.IsNull() {
@@ -8290,7 +8330,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation23(in *jlexer.Lexer, out
 				if out.GPUInformation == nil {
 					out.GPUInformation = new(nvidia_smi.GPU)
 				}
-				(*out.GPUInformation).UnmarshalEasyJSON(in)
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.GPUInformation).UnmarshalJSON(data))
+				}
 			}
 		case "interconnect_name":
 			out.InterconnectName = string(in.String())
@@ -8316,7 +8358,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation23(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation23(out *jwriter.Writer, in SummaryBase) {
+func easyjson679db3deEncodeGithubComC3srEvaluation23(out *jwriter.Writer, in SummaryBase) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -8388,7 +8430,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation23(out *jwriter.Writer, 
 	if in.MachineInformation != nil {
 		const prefix string = ",\"machine_information\":"
 		out.RawString(prefix)
-		easyjson679db3deEncodeGithubComRaiProjectMachine(out, *in.MachineInformation)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine(out, *in.MachineInformation)
 	}
 	if in.GPUDriverVersion != nil {
 		const prefix string = ",\"gpu_driver\":"
@@ -8403,7 +8445,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation23(out *jwriter.Writer, 
 	if in.GPUInformation != nil {
 		const prefix string = ",\"gpu_information\":"
 		out.RawString(prefix)
-		(*in.GPUInformation).MarshalEasyJSON(out)
+		out.Raw((*in.GPUInformation).MarshalJSON())
 	}
 	if in.InterconnectName != "" {
 		const prefix string = ",\"interconnect_name\":"
@@ -8436,27 +8478,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation23(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v SummaryBase) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation23(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation23(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v SummaryBase) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation23(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation23(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *SummaryBase) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation23(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation23(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *SummaryBase) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation23(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation23(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation24(in *jlexer.Lexer, out *RuntimeMemoryInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation24(in *jlexer.Lexer, out *RuntimeMemoryInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -8467,7 +8509,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation24(in *jlexer.Lexer, out
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -8505,7 +8547,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation24(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation24(out *jwriter.Writer, in RuntimeMemoryInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation24(out *jwriter.Writer, in RuntimeMemoryInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -8591,27 +8633,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation24(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v RuntimeMemoryInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation24(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation24(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v RuntimeMemoryInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation24(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation24(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *RuntimeMemoryInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation24(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation24(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *RuntimeMemoryInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation24(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation24(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation25(in *jlexer.Lexer, out *Performance) {
+func easyjson679db3deDecodeGithubComC3srEvaluation25(in *jlexer.Lexer, out *Performance) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -8622,7 +8664,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation25(in *jlexer.Lexer, out
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -8653,7 +8695,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation25(in *jlexer.Lexer, out
 				if out.Trace == nil {
 					out.Trace = new(TraceInformation)
 				}
-				(*out.Trace).UnmarshalEasyJSON(in)
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.Trace).UnmarshalJSON(data))
+				}
 			}
 		case "trace_level":
 			if data := in.Raw(); in.Ok() {
@@ -8675,7 +8719,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation25(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation25(out *jwriter.Writer, in Performance) {
+func easyjson679db3deEncodeGithubComC3srEvaluation25(out *jwriter.Writer, in Performance) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -8706,7 +8750,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation25(out *jwriter.Writer, 
 		if in.Trace == nil {
 			out.RawString("null")
 		} else {
-			(*in.Trace).MarshalEasyJSON(out)
+			out.Raw((*in.Trace).MarshalJSON())
 		}
 	}
 	{
@@ -8725,27 +8769,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation25(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v Performance) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation25(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation25(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Performance) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation25(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation25(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Performance) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation25(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation25(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Performance) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation25(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation25(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation26(in *jlexer.Lexer, out *MemoryInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation26(in *jlexer.Lexer, out *MemoryInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -8756,7 +8800,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation26(in *jlexer.Lexer, out
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -8781,16 +8825,22 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation26(in *jlexer.Lexer, out
 				}
 				for !in.IsDelim(']') {
 					var v204 GPUMemInformation
-					(v204).UnmarshalEasyJSON(in)
+					if data := in.Raw(); in.Ok() {
+						in.AddError((v204).UnmarshalJSON(data))
+					}
 					out.GPU = append(out.GPU, v204)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "runtime":
-			(out.Runtime).UnmarshalEasyJSON(in)
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Runtime).UnmarshalJSON(data))
+			}
 		case "system":
-			(out.System).UnmarshalEasyJSON(in)
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.System).UnmarshalJSON(data))
+			}
 		default:
 			in.AddError(&jlexer.LexerError{
 				Offset: in.GetPos(),
@@ -8805,7 +8855,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation26(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation26(out *jwriter.Writer, in MemoryInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation26(out *jwriter.Writer, in MemoryInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -8819,7 +8869,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation26(out *jwriter.Writer, 
 				if v205 > 0 {
 					out.RawByte(',')
 				}
-				(v206).MarshalEasyJSON(out)
+				out.Raw((v206).MarshalJSON())
 			}
 			out.RawByte(']')
 		}
@@ -8832,7 +8882,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation26(out *jwriter.Writer, 
 		} else {
 			out.RawString(prefix)
 		}
-		(in.Runtime).MarshalEasyJSON(out)
+		out.Raw((in.Runtime).MarshalJSON())
 	}
 	if true {
 		const prefix string = ",\"system\":"
@@ -8842,7 +8892,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation26(out *jwriter.Writer, 
 		} else {
 			out.RawString(prefix)
 		}
-		(in.System).MarshalEasyJSON(out)
+		out.Raw((in.System).MarshalJSON())
 	}
 	out.RawByte('}')
 }
@@ -8850,27 +8900,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation26(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v MemoryInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation26(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation26(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v MemoryInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation26(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation26(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *MemoryInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation26(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation26(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *MemoryInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation26(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation26(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation27(in *jlexer.Lexer, out *GPUMemInformation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation27(in *jlexer.Lexer, out *GPUMemInformation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -8881,7 +8931,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation27(in *jlexer.Lexer, out
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -8917,7 +8967,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation27(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation27(out *jwriter.Writer, in GPUMemInformation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation27(out *jwriter.Writer, in GPUMemInformation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -8993,27 +9043,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation27(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v GPUMemInformation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation27(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation27(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v GPUMemInformation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation27(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation27(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *GPUMemInformation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation27(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation27(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *GPUMemInformation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation27(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation27(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectEvaluation28(in *jlexer.Lexer, out *Evaluation) {
+func easyjson679db3deDecodeGithubComC3srEvaluation28(in *jlexer.Lexer, out *Evaluation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -9024,7 +9074,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation28(in *jlexer.Lexer, out
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -9045,9 +9095,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation28(in *jlexer.Lexer, out
 				in.AddError((out.CreatedAt).UnmarshalJSON(data))
 			}
 		case "framework":
-			easyjson679db3deDecodeGithubComRaiProjectDlframework(in, &out.Framework)
+			easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srDlframework(in, &out.Framework)
 		case "model":
-			easyjson679db3deDecodeGithubComRaiProjectDlframework1(in, &out.Model)
+			easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srDlframework1(in, &out.Model)
 		case "dataset_category":
 			out.DatasetCategory = string(in.String())
 		case "dataset_name":
@@ -9109,7 +9159,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation28(in *jlexer.Lexer, out
 				if out.MachineInformation == nil {
 					out.MachineInformation = new(machine.Machine)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectMachine(in, out.MachineInformation)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srMachine(in, out.MachineInformation)
 			}
 		case "gpu_driver":
 			if in.IsNull() {
@@ -9139,7 +9189,9 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation28(in *jlexer.Lexer, out
 				if out.GPUInformation == nil {
 					out.GPUInformation = new(nvidia_smi.GPU)
 				}
-				(*out.GPUInformation).UnmarshalEasyJSON(in)
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.GPUInformation).UnmarshalJSON(data))
+				}
 			}
 		case "metadata":
 			if in.IsNull() {
@@ -9175,7 +9227,7 @@ func easyjson679db3deDecodeGithubComRaiProjectEvaluation28(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectEvaluation28(out *jwriter.Writer, in Evaluation) {
+func easyjson679db3deEncodeGithubComC3srEvaluation28(out *jwriter.Writer, in Evaluation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -9223,7 +9275,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation28(out *jwriter.Writer, 
 		} else {
 			out.RawString(prefix)
 		}
-		easyjson679db3deEncodeGithubComRaiProjectDlframework(out, in.Framework)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srDlframework(out, in.Framework)
 	}
 	if true {
 		const prefix string = ",\"model\":"
@@ -9233,7 +9285,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation28(out *jwriter.Writer, 
 		} else {
 			out.RawString(prefix)
 		}
-		easyjson679db3deEncodeGithubComRaiProjectDlframework1(out, in.Model)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srDlframework1(out, in.Model)
 	}
 	if in.DatasetCategory != "" {
 		const prefix string = ",\"dataset_category\":"
@@ -9382,7 +9434,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation28(out *jwriter.Writer, 
 		} else {
 			out.RawString(prefix)
 		}
-		easyjson679db3deEncodeGithubComRaiProjectMachine(out, *in.MachineInformation)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srMachine(out, *in.MachineInformation)
 	}
 	if in.GPUDriverVersion != nil {
 		const prefix string = ",\"gpu_driver\":"
@@ -9412,7 +9464,7 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation28(out *jwriter.Writer, 
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.GPUInformation).MarshalEasyJSON(out)
+		out.Raw((*in.GPUInformation).MarshalJSON())
 	}
 	if len(in.Metadata) != 0 {
 		const prefix string = ",\"metadata\":"
@@ -9444,27 +9496,27 @@ func easyjson679db3deEncodeGithubComRaiProjectEvaluation28(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v Evaluation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation28(&w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation28(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Evaluation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson679db3deEncodeGithubComRaiProjectEvaluation28(w, v)
+	easyjson679db3deEncodeGithubComC3srEvaluation28(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Evaluation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation28(&r, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation28(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Evaluation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson679db3deDecodeGithubComRaiProjectEvaluation28(l, v)
+	easyjson679db3deDecodeGithubComC3srEvaluation28(l, v)
 }
-func easyjson679db3deDecodeGithubComRaiProjectDlframework1(in *jlexer.Lexer, out *dlframework.ModelManifest) {
+func easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srDlframework1(in *jlexer.Lexer, out *dlframework.ModelManifest) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -9475,7 +9527,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframework1(in *jlexer.Lexer, out
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -9495,7 +9547,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframework1(in *jlexer.Lexer, out
 				if out.Framework == nil {
 					out.Framework = new(dlframework.FrameworkManifest)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectDlframework(in, out.Framework)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srDlframework(in, out.Framework)
 			}
 		case "container":
 			if in.IsNull() {
@@ -9518,7 +9570,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframework1(in *jlexer.Lexer, out
 						if v212 == nil {
 							v212 = new(dlframework.ContainerHardware)
 						}
-						easyjson679db3deDecodeGithubComRaiProjectDlframework2(in, v212)
+						easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srDlframework2(in, v212)
 					}
 					(out.Container)[key] = v212
 					in.WantComma()
@@ -9576,7 +9628,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframework1(in *jlexer.Lexer, out
 						if v214 == nil {
 							v214 = new(dlframework.ModelManifest_Type)
 						}
-						easyjson679db3deDecodeGithubComRaiProjectDlframeworkModelManifest(in, v214)
+						easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srDlframeworkModelManifest(in, v214)
 					}
 					out.Inputs = append(out.Inputs, v214)
 					in.WantComma()
@@ -9591,7 +9643,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframework1(in *jlexer.Lexer, out
 				if out.Output == nil {
 					out.Output = new(dlframework.ModelManifest_Type)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectDlframeworkModelManifest(in, out.Output)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srDlframeworkModelManifest(in, out.Output)
 			}
 		case "before_preprocess":
 			out.BeforePreprocess = string(in.String())
@@ -9613,7 +9665,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframework1(in *jlexer.Lexer, out
 				if out.Model == nil {
 					out.Model = new(dlframework.ModelManifest_Model)
 				}
-				easyjson679db3deDecodeGithubComRaiProjectDlframeworkModelManifest1(in, out.Model)
+				easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srDlframeworkModelManifest1(in, out.Model)
 			}
 		case "attributes":
 			if in.IsNull() {
@@ -9651,7 +9703,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframework1(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectDlframework1(out *jwriter.Writer, in dlframework.ModelManifest) {
+func easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srDlframework1(out *jwriter.Writer, in dlframework.ModelManifest) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -9679,7 +9731,7 @@ func easyjson679db3deEncodeGithubComRaiProjectDlframework1(out *jwriter.Writer, 
 		} else {
 			out.RawString(prefix)
 		}
-		easyjson679db3deEncodeGithubComRaiProjectDlframework(out, *in.Framework)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srDlframework(out, *in.Framework)
 	}
 	if len(in.Container) != 0 {
 		const prefix string = ",\"container\":"
@@ -9703,7 +9755,7 @@ func easyjson679db3deEncodeGithubComRaiProjectDlframework1(out *jwriter.Writer, 
 				if v216Value == nil {
 					out.RawString("null")
 				} else {
-					easyjson679db3deEncodeGithubComRaiProjectDlframework2(out, *v216Value)
+					easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srDlframework2(out, *v216Value)
 				}
 			}
 			out.RawByte('}')
@@ -9765,7 +9817,7 @@ func easyjson679db3deEncodeGithubComRaiProjectDlframework1(out *jwriter.Writer, 
 				if v220 == nil {
 					out.RawString("null")
 				} else {
-					easyjson679db3deEncodeGithubComRaiProjectDlframeworkModelManifest(out, *v220)
+					easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srDlframeworkModelManifest(out, *v220)
 				}
 			}
 			out.RawByte(']')
@@ -9779,7 +9831,7 @@ func easyjson679db3deEncodeGithubComRaiProjectDlframework1(out *jwriter.Writer, 
 		} else {
 			out.RawString(prefix)
 		}
-		easyjson679db3deEncodeGithubComRaiProjectDlframeworkModelManifest(out, *in.Output)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srDlframeworkModelManifest(out, *in.Output)
 	}
 	if in.BeforePreprocess != "" {
 		const prefix string = ",\"before_preprocess\":"
@@ -9849,7 +9901,7 @@ func easyjson679db3deEncodeGithubComRaiProjectDlframework1(out *jwriter.Writer, 
 		} else {
 			out.RawString(prefix)
 		}
-		easyjson679db3deEncodeGithubComRaiProjectDlframeworkModelManifest1(out, *in.Model)
+		easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srDlframeworkModelManifest1(out, *in.Model)
 	}
 	if len(in.Attributes) != 0 {
 		const prefix string = ",\"attributes\":"
@@ -9887,7 +9939,7 @@ func easyjson679db3deEncodeGithubComRaiProjectDlframework1(out *jwriter.Writer, 
 	}
 	out.RawByte('}')
 }
-func easyjson679db3deDecodeGithubComRaiProjectDlframeworkModelManifest1(in *jlexer.Lexer, out *dlframework.ModelManifest_Model) {
+func easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srDlframeworkModelManifest1(in *jlexer.Lexer, out *dlframework.ModelManifest_Model) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -9898,7 +9950,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframeworkModelManifest1(in *jlex
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -9932,7 +9984,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframeworkModelManifest1(in *jlex
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectDlframeworkModelManifest1(out *jwriter.Writer, in dlframework.ModelManifest_Model) {
+func easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srDlframeworkModelManifest1(out *jwriter.Writer, in dlframework.ModelManifest_Model) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -9994,7 +10046,7 @@ func easyjson679db3deEncodeGithubComRaiProjectDlframeworkModelManifest1(out *jwr
 	}
 	out.RawByte('}')
 }
-func easyjson679db3deDecodeGithubComRaiProjectDlframeworkModelManifest(in *jlexer.Lexer, out *dlframework.ModelManifest_Type) {
+func easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srDlframeworkModelManifest(in *jlexer.Lexer, out *dlframework.ModelManifest_Type) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -10005,7 +10057,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframeworkModelManifest(in *jlexe
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -10038,7 +10090,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframeworkModelManifest(in *jlexe
 						if v222 == nil {
 							v222 = new(dlframework.ModelManifest_Type_Parameter)
 						}
-						easyjson679db3deDecodeGithubComRaiProjectDlframeworkModelManifestType(in, v222)
+						easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srDlframeworkModelManifestType(in, v222)
 					}
 					(out.Parameters)[key] = v222
 					in.WantComma()
@@ -10059,7 +10111,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframeworkModelManifest(in *jlexe
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectDlframeworkModelManifest(out *jwriter.Writer, in dlframework.ModelManifest_Type) {
+func easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srDlframeworkModelManifest(out *jwriter.Writer, in dlframework.ModelManifest_Type) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -10101,7 +10153,7 @@ func easyjson679db3deEncodeGithubComRaiProjectDlframeworkModelManifest(out *jwri
 				if v223Value == nil {
 					out.RawString("null")
 				} else {
-					easyjson679db3deEncodeGithubComRaiProjectDlframeworkModelManifestType(out, *v223Value)
+					easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srDlframeworkModelManifestType(out, *v223Value)
 				}
 			}
 			out.RawByte('}')
@@ -10109,7 +10161,7 @@ func easyjson679db3deEncodeGithubComRaiProjectDlframeworkModelManifest(out *jwri
 	}
 	out.RawByte('}')
 }
-func easyjson679db3deDecodeGithubComRaiProjectDlframeworkModelManifestType(in *jlexer.Lexer, out *dlframework.ModelManifest_Type_Parameter) {
+func easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srDlframeworkModelManifestType(in *jlexer.Lexer, out *dlframework.ModelManifest_Type_Parameter) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -10120,7 +10172,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframeworkModelManifestType(in *j
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -10144,7 +10196,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframeworkModelManifestType(in *j
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectDlframeworkModelManifestType(out *jwriter.Writer, in dlframework.ModelManifest_Type_Parameter) {
+func easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srDlframeworkModelManifestType(out *jwriter.Writer, in dlframework.ModelManifest_Type_Parameter) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -10156,7 +10208,7 @@ func easyjson679db3deEncodeGithubComRaiProjectDlframeworkModelManifestType(out *
 	}
 	out.RawByte('}')
 }
-func easyjson679db3deDecodeGithubComRaiProjectDlframework2(in *jlexer.Lexer, out *dlframework.ContainerHardware) {
+func easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srDlframework2(in *jlexer.Lexer, out *dlframework.ContainerHardware) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -10167,7 +10219,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframework2(in *jlexer.Lexer, out
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -10193,7 +10245,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframework2(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectDlframework2(out *jwriter.Writer, in dlframework.ContainerHardware) {
+func easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srDlframework2(out *jwriter.Writer, in dlframework.ContainerHardware) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -10215,7 +10267,7 @@ func easyjson679db3deEncodeGithubComRaiProjectDlframework2(out *jwriter.Writer, 
 	}
 	out.RawByte('}')
 }
-func easyjson679db3deDecodeGithubComRaiProjectDlframework(in *jlexer.Lexer, out *dlframework.FrameworkManifest) {
+func easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srDlframework(in *jlexer.Lexer, out *dlframework.FrameworkManifest) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -10226,7 +10278,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframework(in *jlexer.Lexer, out 
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -10259,7 +10311,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframework(in *jlexer.Lexer, out 
 						if v224 == nil {
 							v224 = new(dlframework.ContainerHardware)
 						}
-						easyjson679db3deDecodeGithubComRaiProjectDlframework2(in, v224)
+						easyjson679db3deDecodeGithubComC3srEvaluationVendorGithubComC3srDlframework2(in, v224)
 					}
 					(out.Container)[key] = v224
 					in.WantComma()
@@ -10280,7 +10332,7 @@ func easyjson679db3deDecodeGithubComRaiProjectDlframework(in *jlexer.Lexer, out 
 		in.Consumed()
 	}
 }
-func easyjson679db3deEncodeGithubComRaiProjectDlframework(out *jwriter.Writer, in dlframework.FrameworkManifest) {
+func easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srDlframework(out *jwriter.Writer, in dlframework.FrameworkManifest) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -10322,7 +10374,7 @@ func easyjson679db3deEncodeGithubComRaiProjectDlframework(out *jwriter.Writer, i
 				if v225Value == nil {
 					out.RawString("null")
 				} else {
-					easyjson679db3deEncodeGithubComRaiProjectDlframework2(out, *v225Value)
+					easyjson679db3deEncodeGithubComC3srEvaluationVendorGithubComC3srDlframework2(out, *v225Value)
 				}
 			}
 			out.RawByte('}')
