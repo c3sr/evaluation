@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Unknwon/com"
+	"github.com/unknwon/com"
 	framework "github.com/c3sr/dlframework/framework/cmd"
 	"github.com/c3sr/evaluation"
 	udb "upper.io/db.v3"

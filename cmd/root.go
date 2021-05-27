@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"github.com/GeertJohan/go-sourcepath"
-	"github.com/Unknwon/com"
-	"github.com/k0kubun/pp"
+	"github.com/unknwon/com"
+	"github.com/k0kubun/pp/v3"
 	"github.com/c3sr/config"
 	"github.com/c3sr/database"
 	mongodb "github.com/c3sr/database/mongodb"

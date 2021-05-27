@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Unknwon/com"
+	"github.com/unknwon/com"
 	"github.com/ianlancetaylor/demangle"
 	"github.com/spf13/cast"
 	model "github.com/uber/jaeger/model/json"

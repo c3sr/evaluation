@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Unknwon/com"
+	"github.com/unknwon/com"
 	"github.com/olekukonko/tablewriter"
 	"github.com/c3sr/evaluation/writer"
 )

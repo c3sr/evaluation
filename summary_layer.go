@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/k0kubun/pp"
+	"github.com/k0kubun/pp/v3"
 	"github.com/c3sr/evaluation/writer"
 	"github.com/c3sr/go-echarts/charts"
 	"github.com/c3sr/tracer"

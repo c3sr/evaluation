@@ -5,7 +5,7 @@ import (
 
 	"github.com/mailru/easyjson"
 
-	"github.com/Unknwon/com"
+	"github.com/unknwon/com"
 	"github.com/pkg/errors"
 	"github.com/c3sr/evaluation"
 	model "github.com/uber/jaeger/model/json"

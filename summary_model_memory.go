@@ -6,7 +6,7 @@ import (
 
 	"github.com/c3sr/tracer"
 
-	"github.com/k0kubun/pp"
+	"github.com/k0kubun/pp/v3"
 	"github.com/spf13/cast"
 	model "github.com/uber/jaeger/model/json"
 )
